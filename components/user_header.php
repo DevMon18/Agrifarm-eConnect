@@ -15,13 +15,13 @@
 
    <section class="flex">
 
-      <a href="index.php" class="logo">Group <span>4</span></a>
+      <a href="index.php" class="logo">Agrifarm e-Connect<span></span></a>
 
       <nav class="navbar">
-         <a href="index.php">Reserve</a>
-         <a href="about.php">About</a>
-         <a href="orders.php">Orders</a>
+         <a href="index.php">Home</a>
          <a href="shop.php">Shop</a>
+         <a href="orders.php">Orders</a>
+         <a href="about.php">About</a>
          <a href="contact.php">Contact us</a>
       </nav>
 

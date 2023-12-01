@@ -10,7 +10,7 @@
    /* original */
    /* --light-bg:#f5f5f5;  */
    /* mystyle */
-   --light-bg:#c756e4;
+   --light-bg:#b4d2ba;
 
    --border:.2rem solid var(--black);
    --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
@@ -48,7 +48,7 @@ html{
 }
 
 body{
-   background-color: var(--light-bg);
+   background-color: #b4d2ba;
    /* padding-bottom: 10rem; */
 }
 

@@ -20,10 +20,10 @@
 
       <div class="box">
          <h3>Contact us</h3>
-         <a href="tel:09153858690"><i class="fas fa-phone"></i> +639153858690</a>
+         <a href="tel:09153858690"><i class="fas fa-phone"></i> +639456847868</a>
          <a href="tel:09165306030"><i class="fas fa-phone"></i> +639165306030</a>
-         <a href="mailto:potolin110394gmail.com"><i class="fas fa-envelope"></i> potolinresty110394@gmail.com</a>
-         <a href="https://whatismyipaddress.com/"><i class="fas fa-map-marker-alt"></i>Rodriguez Rizal, Philippines</a>
+         <a href="mailto:potolin110394gmail.com"><i class="fas fa-envelope"></i> ritzmond.manzo@evsu.edu.ph</a>
+         <a href="https://whatismyipaddress.com/"><i class="fas fa-map-marker-alt"></i>Osmena St, Ormoc, Leyte: EVSU-OCC</a>
       </div>
 
       <div class="box">
@@ -36,6 +36,6 @@
 
    </section>
 
-   <div class="credit">&copy;©Copyright 2022<?= date('Y'); ?>All rights reserved.<span>Powered by</span> | Devres</div>
+   <div class="credit">&copy;Copyright 2023<?= date('Y'); ?>All rights reserved.<span>Powered by</span> | 3C-BSIT.EVSU</div>
 
 </footer>
