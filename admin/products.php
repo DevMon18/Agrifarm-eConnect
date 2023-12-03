@@ -1,6 +1,6 @@
 <?php
 
-include '../components/connect.php';
+require_once '../components/connect.php';
 
 session_start();
 
@@ -99,7 +99,7 @@ if(isset($_GET['delete'])){
 </head>
 <body>
 
-<?php include '../components/admin_header.php'; ?>
+<?php require_once '../components/admin_header.php'; ?>
 
 <section class="add-products">
 
@@ -115,18 +115,18 @@ if(isset($_GET['delete'])){
             <span>product price (required)</span>
             <input type="number" min="0" class="box" required max="9999999999" placeholder="enter product price" onkeypress="if(this.value.length == 10) return false;" name="price">
          </div>
-        <div class="inputBox">
+      <div class="inputBox">
             <span>image 01 (required)</span>
             <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
-        </div>
-        <div class="inputBox">
+      </div>
+      <div class="inputBox">
             <span>image 02 (required)</span>
             <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
-        </div>
-        <div class="inputBox">
+      </div>
+      <div class="inputBox">
             <span>image 03 (required)</span>
             <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
-        </div>
+      </div>
          <div class="inputBox">
             <span>product details (required)</span>
             <textarea name="details" placeholder="enter product details" class="box" required maxlength="500" cols="30" rows="10"></textarea>
@@ -170,14 +170,6 @@ if(isset($_GET['delete'])){
    </div>
 
 </section>
-
-
-
-
-
-
-
-
 <script src="../js/admin_script.js"></script>
    
 </body>

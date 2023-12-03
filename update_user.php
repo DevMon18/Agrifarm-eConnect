@@ -1,6 +1,6 @@
 <?php
 
-include 'components/connect.php';
+require_once 'components/connect.php';
 
 session_start();
 
@@ -66,7 +66,7 @@ if(isset($_POST['submit'])){
 </head>
 <body>
    
-<?php include 'components/user_header.php'; ?>
+<?php require_once 'components/user_header.php'; ?>
 
 <section class="form-container">
 
@@ -95,7 +95,7 @@ if(isset($_POST['submit'])){
 
 
 
-<?php include 'components/footer.php'; ?>
+<?php require_once 'components/footer.php'; ?>
 
 <script src="js/script.js"></script>
 

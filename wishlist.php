@@ -1,6 +1,6 @@
 <?php
 
-include 'components/connect.php';
+require_once 'components/connect.php';
 
 session_start();
 
@@ -11,7 +11,7 @@ if(isset($_SESSION['user_id'])){
    header('location:user_login.php');
 };
 
-include 'components/wishlist_cart.php';
+require_once 'components/wishlist_cart.php';
 
 if(isset($_POST['delete'])){
    $wishlist_id = $_POST['wishlist_id'];
@@ -44,7 +44,7 @@ if(isset($_GET['delete_all'])){
 </head>
 <body>
    
-<?php include 'components/user_header.php'; ?>
+<?php require_once 'components/user_header.php'; ?>
 
 <section class="products">
 
@@ -92,7 +92,7 @@ if(isset($_GET['delete_all'])){
    </div>
 
 </section>
-<?php include 'components/footer.php'; ?>
+<?php require_once 'components/footer.php'; ?>
 
 <script src="js/script.js"></script>
 

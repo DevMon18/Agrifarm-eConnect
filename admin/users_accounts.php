@@ -1,6 +1,6 @@
 <?php
 
-include '../components/connect.php';
+require_once '../components/connect.php';
 
 session_start();
 
@@ -72,18 +72,6 @@ if(isset($_GET['delete'])){
    </div>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
 <script src="../js/admin_script.js"></script>
    
 </body>

@@ -1,6 +1,6 @@
 <?php
 
-include '../components/connect.php';
+require_once '../components/connect.php';
 
 session_start();
 

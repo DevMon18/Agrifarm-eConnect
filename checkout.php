@@ -1,6 +1,6 @@
 <?php
 
-include 'components/connect.php';
+require_once 'components/connect.php';
 
 session_start();
 
@@ -63,7 +63,7 @@ if(isset($_POST['order'])){
 </head>
 <body>
    
-<?php include 'components/user_header.php'; ?>
+<?php require_once 'components/user_header.php'; ?>
 
 <section class="checkout-orders">
 
@@ -99,20 +99,20 @@ if(isset($_POST['order'])){
 
       <div class="flex">
          <div class="inputBox">
-            <span>your name :</span>
-            <input type="text" name="name" placeholder="enter your name" class="box" maxlength="20" required>
+            <span>Full Name</span>
+            <input type="text" name="name" class="form-chk" maxlength="20" required>
          </div>
          <div class="inputBox">
-            <span>your number :</span>
-            <input type="number" name="number" placeholder="enter your number" class="box" min="0" max="9999999999" onkeypress="if(this.value.length == 10) return false;" required>
+            <span>Contact No.</span>
+            <input type="number" name="number" class="form-chk" min="0" max="9999999999" onkeypress="if(this.value.length == 10) return false;" required>
          </div>
          <div class="inputBox">
-            <span>your email :</span>
-            <input type="email" name="email" placeholder="enter your email" class="box" maxlength="50" required>
+            <span>Email</span>
+            <input type="email" name="email" class="form-chk" maxlength="50" required>
          </div>
          <div class="inputBox">
-            <span>payment method :</span>
-            <select name="method" class="box" required>
+            <span>Payment method</span>
+            <select name="method" class="form-chk" required>
                <option value="cash on delivery">cash on delivery</option>
                <option value="credit card">credit card</option>
                <option value="paytm">paytm</option>
@@ -120,28 +120,28 @@ if(isset($_POST['order'])){
             </select>
          </div>
          <div class="inputBox">
-            <span>address line 01 :</span>
-            <input type="text" name="flat" placeholder="e.g. flat number" class="box" maxlength="50" required>
+            <span>Address 1</span>
+            <input type="text" name="flat" class="form-chk" maxlength="50" required>
          </div>
          <div class="inputBox">
-            <span>address line 02 :</span>
-            <input type="text" name="street" placeholder="e.g. street name" class="box" maxlength="50" required>
+            <span>Address 2</span>
+            <input type="text" name="street" class="form-chk" maxlength="50" required>
          </div>
          <div class="inputBox">
-            <span>city :</span>
-            <input type="text" name="city" placeholder="e.g. mumbai" class="box" maxlength="50" required>
+            <span>City</span>
+            <input type="text" name="city" class="form-chk" maxlength="50" required>
          </div>
          <div class="inputBox">
-            <span>state :</span>
-            <input type="text" name="state" placeholder="e.g. maharashtra" class="box" maxlength="50" required>
+            <span>State</span>
+            <input type="text" name="state" class="form-chk" maxlength="50" required>
          </div>
          <div class="inputBox">
-            <span>country :</span>
-            <input type="text" name="country" placeholder="e.g. India" class="box" maxlength="50" required>
+            <span>Country</span>
+            <input type="text" name="country" class="form-chk" maxlength="50" required>
          </div>
          <div class="inputBox">
-            <span>pin code :</span>
-            <input type="number" min="0" name="pin_code" placeholder="e.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
+            <span>Pin code</span>
+            <input type="number" min="0" name="pin_code" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="form-chk" required>
          </div>
       </div>
 
@@ -163,7 +163,7 @@ if(isset($_POST['order'])){
 
 
 
-<?php include 'components/footer.php'; ?>
+<?php require_once 'components/footer.php'; ?>
 
 <script src="js/script.js"></script>
 

@@ -1,6 +1,6 @@
 <?php
 
-include '../components/connect.php';
+require_once '../components/connect.php';
 
 session_start();
 
@@ -27,7 +27,7 @@ if(!isset($admin_id)){
 </head>
 <body>
 
-<?php include '../components/admin_header.php'; ?>
+<?php require_once '../components/admin_header.php'; ?>
 
 <section class="dashboard">
 
@@ -131,18 +131,6 @@ if(!isset($admin_id)){
    </div>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
 <script src="../js/admin_script.js"></script>
    
 </body>

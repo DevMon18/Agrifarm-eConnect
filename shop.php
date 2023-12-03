@@ -1,6 +1,6 @@
 <?php
 
-include 'components/connect.php';
+require_once 'components/connect.php';
 
 session_start();
 
@@ -10,7 +10,7 @@ if(isset($_SESSION['user_id'])){
    $user_id = '';
 };
 
-include 'components/wishlist_cart.php';
+require_once 'components/wishlist_cart.php';
 
 ?>
 
@@ -31,7 +31,7 @@ include 'components/wishlist_cart.php';
 </head>
 <body>
    
-<?php include 'components/user_header.php'; ?>
+<?php require_once 'components/user_header.php'; ?>
 
 <section class="products">
 
@@ -56,7 +56,7 @@ include 'components/wishlist_cart.php';
       <div class="name"><?= $fetch_product['name']; ?></div>
       <div class="flex">
          <div class="price"><span>₱</span><?= $fetch_product['price']; ?><span>/-</span></div>
-         <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
+         <input type="number" name="qty" class="form-qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
       </div>
       <input type="submit" value="add to cart" class="btn" name="add_to_cart">
    </form>
@@ -70,20 +70,7 @@ include 'components/wishlist_cart.php';
    </div>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php include 'components/footer.php'; ?>
+<?php require_once 'components/footer.php'; ?>
 
 <script src="js/script.js"></script>
 
