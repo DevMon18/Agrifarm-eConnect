@@ -35,7 +35,7 @@ require_once 'components/wishlist_cart.php';
 
 <section class="search-form">
    <form action="" method="post">
-      <input type="text" name="search_box" placeholder="search here..." maxlength="100" class="box" required>
+      <input type="text" name="search_box" placeholder="search here..." maxlength="100" class="form-search" required>
       <button type="submit" class="fas fa-search" name="search_btn"></button>
    </form>
 </section>
@@ -63,7 +63,7 @@ require_once 'components/wishlist_cart.php';
       <div class="name"><?= $fetch_product['name']; ?></div>
       <div class="flex">
          <div class="price"><span>₱</span><?= $fetch_product['price']; ?><span>/-</span></div>
-         <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
+         <input type="number" name="qty" class="form-qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
       </div>
       <input type="submit" value="add to cart" class="btn" name="add_to_cart">
    </form>
@@ -78,18 +78,6 @@ require_once 'components/wishlist_cart.php';
    </div>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
 <?php require_once 'components/footer.php'; ?>
 
 <script src="js/script.js"></script>
