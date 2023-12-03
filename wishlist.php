@@ -60,6 +60,7 @@ if(isset($_GET['delete_all'])){
          while($fetch_wishlist = $select_wishlist->fetch(PDO::FETCH_ASSOC)){
             $grand_total += $fetch_wishlist['price'];  
    ?>
+   
    <form action="" method="post" class="box">
       <input type="hidden" name="pid" value="<?= $fetch_wishlist['pid']; ?>">
       <input type="hidden" name="wishlist_id" value="<?= $fetch_wishlist['id']; ?>">
@@ -91,19 +92,6 @@ if(isset($_GET['delete_all'])){
    </div>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php include 'components/footer.php'; ?>
 
 <script src="js/script.js"></script>
