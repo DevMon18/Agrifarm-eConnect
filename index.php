@@ -41,47 +41,19 @@ include 'components/wishlist_cart.php';
 <section class="home">
 
    <div class="swiper home-slider">
-   
-   <div class="swiper-wrapper">
-
-      <div class="swiper-slide slide">
-         <div class="image">
-            <img src="images/HO1.png" alt="">
-         </div>
-         <!-- <div class="content">
-            <span></span>
-            <h3></h3>
-            <a href="shop.php" class="btn">shop now</a>
-         </div>
+      <div class="swiper-wrapper">
+          <div class="swiper-slide slide">
+               <div class="image">
+                  <img src="images/slider1.jpg" alt="">
+               </div>
+          </div>
+          <div class="swiper-slide slide">
+               <div class="image">
+                  <img src="images/utan.jpg" alt="">
+               </div>
+          </div>
       </div>
-
-      <div class="swiper-slide slide">
-         <div class="image">
-            <img src="images/home-img-2.png" alt="">
-         </div>
-         <div class="content">
-            <span></span>
-            <h3></h3>
-            <a href="shop.php" class="btn">shop now</a>
-         </div>
-      </div>
-
-      <div class="swiper-slide slide">
-         <div class="image">
-            <img src="images/home-img-3.png" alt="">
-         </div>
-         <div class="content">
-            <span></span>
-            <h3></h3>
-            <a href="shop.php" class="btn">shop now</a>
-         </div>
-      </div>
-
    </div>
-
-      <div class="swiper-pagination"></div>
-
-   </div> -->
 </section>
 
 </div>
@@ -196,7 +168,7 @@ include 'components/wishlist_cart.php';
 
 var swiper = new Swiper(".home-slider", {
    loop:true,
-   spaceBetween: 20,
+   spaceBetween: 50,
    pagination: {
       el: ".swiper-pagination",
       clickable:true,

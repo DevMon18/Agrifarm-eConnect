@@ -1056,7 +1056,7 @@ section{
    .flex-btn{
       flex-flow: column;
       gap:0;
-   }
+   }  
 
    .quick-view form .row .image-container .sub-image img{
       width: 8rem;
