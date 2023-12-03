@@ -1,6 +1,6 @@
 <?php
 
-include 'components/connect.php';
+require_once 'components/connect.php';
 
 session_start();
 
@@ -10,7 +10,7 @@ if(isset($_SESSION['user_id'])){
    $user_id = '';
 };
 
-include 'components/wishlist_cart.php';
+require_once 'components/wishlist_cart.php';
 
 ?>
 
@@ -34,7 +34,7 @@ include 'components/wishlist_cart.php';
 </head>
 <body>
    
-<?php include 'components/user_header.php'; ?>
+<?php require_once 'components/user_header.php'; ?>
 
 <div class="home-">
 
@@ -116,8 +116,8 @@ include 'components/wishlist_cart.php';
 
    <?php
      $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 6"); 
-     $select_products->execute();
-     if($select_products->rowCount() > 0){
+      $select_products->execute();
+      if($select_products->rowCount() > 0){
       while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
    ?>
    <form action="" method="post" class="swiper-slide slide">
@@ -131,7 +131,7 @@ include 'components/wishlist_cart.php';
       <div class="name"><?= $fetch_product['name']; ?></div>
       <div class="flex">
          <div class="price"><span>₱</span><?= $fetch_product['price']; ?><span>/-</span></div>
-         <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
+         <input type="number" name="qty" class="form-qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
       </div>
       <input type="submit" value="add to cart" class="btn" name="add_to_cart">
    </form>
@@ -158,7 +158,7 @@ include 'components/wishlist_cart.php';
 
 
 
-<?php include 'components/footer.php'; ?>
+<?php require_once 'components/footer.php'; ?>
 
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 
@@ -172,10 +172,10 @@ var swiper = new Swiper(".home-slider", {
    pagination: {
       el: ".swiper-pagination",
       clickable:true,
-    },
+   },
 });
 
- var swiper = new Swiper(".category-slider", {
+var swiper = new Swiper(".category-slider", {
    loop:true,
    spaceBetween: 20,
    pagination: {
