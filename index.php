@@ -67,18 +67,18 @@ require_once 'components/wishlist_cart.php';
    <div class="swiper-wrapper">
 
    <a href="category.php?category=laptop" class="swiper-slide slide">
-      <img src="images/utan.jpg" alt="">
-      <h3>Veggies</h3>
+      <img src="images/icon-1.1.png" alt="">
+      <h3>laptop</h3>
    </a>
 
    <a href="category.php?category=tv" class="swiper-slide slide">
-      <img src="images/lamas.jpg" alt="">
-      <h3>Root crops</h3>
+      <img src="images/icon-2.jpg" alt="">
+      <h3>tv</h3>
    </a>
 
    <a href="category.php?category=camera" class="swiper-slide slide">
-      <img src="images/live.jpg" alt="">
-      <h3>Live stock</h3>
+      <img src="images/zz.png" alt="">
+      <h3>camera</h3>
    </a>
 
    <!-- <a href="category.php?category=mouse" class="swiper-slide slide">
@@ -96,7 +96,15 @@ require_once 'components/wishlist_cart.php';
       <h3>washing machine</h3>
    </a> -->
 
+   <a href="category.php?category=smartphone" class="swiper-slide slide">
+      <img src="images/zz3.jpg" alt="">
+      <h3>smartphone</h3>
+   </a>
 
+   <a href="category.php?category=watch" class="swiper-slide slide">
+      <img src="images/zz4.jpg" alt="">
+      <h3>watch</h3>
+   </a>
 
    </div>
 
