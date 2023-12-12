@@ -1,6 +1,6 @@
 <?php
 
-include '../components/connect.php';
+require_once '../components/connect.php';
 
 session_start();
 
@@ -27,7 +27,7 @@ if(!isset($admin_id)){
 </head>
 <body>
 
-<?php include '../components/admin_header.php'; ?>
+<?php require_once '../components/admin_header.php'; ?>
 
 <section class="dashboard">
 
@@ -125,24 +125,12 @@ if(!isset($admin_id)){
          ?>
          <h3><?= $number_of_messages; ?></h3>
          <p>new messages</p>
-         <a href="messages.php" class="btn">see messages</a>
+         <a href="messagess.php" class="btn">see messages</a>
       </div>
 
    </div>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
 <script src="../js/admin_script.js"></script>
    
 </body>

@@ -1,6 +1,6 @@
 <?php
 
-include '../components/connect.php';
+require_once '../components/connect.php';
 
 session_start();
 
@@ -101,7 +101,7 @@ if(isset($_POST['update'])){
 </head>
 <body>
 
-<?php include '../components/admin_header.php'; ?>
+<?php require_once '../components/admin_header.php'; ?>
 
 <section class="update-product">
 
@@ -155,18 +155,6 @@ if(isset($_POST['update'])){
    ?>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
 <script src="../js/admin_script.js"></script>
    
 </body>

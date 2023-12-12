@@ -18,6 +18,7 @@
       <a href="../admin/dashboard.php" class="logo">Admin<span>Panel</span></a>
 
       <nav class="navbar">
+         <a href="../admin/dashboard.php">Reservex</a>
          <a href="../admin/products.php">Products</a>
          <a href="../admin/placed_orders.php">Orders</a>
          <a href="../admin/admin_accounts.php">Admins</a>

@@ -1,6 +1,6 @@
 <?php
 
-include 'components/connect.php';
+require_once 'components/connect.php';
 
 session_start();
 
@@ -29,7 +29,7 @@ if(isset($_SESSION['user_id'])){
 </head>
 <body>
    
-<?php include 'components/user_header.php'; ?>
+<?php require_once 'components/user_header.php'; ?>
 
 <section class="orders">
 
@@ -69,19 +69,7 @@ if(isset($_SESSION['user_id'])){
 
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-<?php include 'components/footer.php'; ?>
+<?php require_once 'components/footer.php'; ?>
 
 <script src="js/script.js"></script>
 
