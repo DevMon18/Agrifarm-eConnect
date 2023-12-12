@@ -1,6 +1,6 @@
 <?php
 
-require_once 'components/connect.php';
+include 'components/connect.php';
 
 session_start();
 
@@ -49,20 +49,34 @@ if(isset($_POST['submit'])){
 </head>
 <body>
    
-<?php require_once 'components/user_header.php'; ?>
+<?php include 'components/user_header.php'; ?>
 
 <section class="form-container">
 
    <form action="" method="post">
       <h3>login now</h3>
-      <input type="email" name="email" required placeholder="Email" maxlength="50"  class="form-control" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="pass" required placeholder="Password" maxlength="20"  class="form-control" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="email" name="email" required placeholder="Email" maxlength="50"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="password" name="pass" required placeholder="Password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="submit" value="login now" class="btn" name="submit">
-      <p>Don't have an account? <a href="user_register.php" class=""> Register now</a></p>
+      <p>Don't have an account?</p>
+      <a href="user_register.php" class="option-btn">register now</a>
    </form>
 
 </section>
-<?php require_once 'components/footer.php'; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php include 'components/footer.php'; ?>
 
 <script src="js/script.js"></script>
 

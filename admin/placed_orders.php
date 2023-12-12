@@ -1,6 +1,6 @@
 <?php
 
-require_once '../components/connect.php';
+include '../components/connect.php';
 
 session_start();
 
@@ -43,7 +43,7 @@ if(isset($_GET['delete'])){
 </head>
 <body>
 
-<?php require_once '../components/admin_header.php'; ?>
+<?php include '../components/admin_header.php'; ?>
 
 <section class="orders">
 
@@ -72,10 +72,10 @@ if(isset($_GET['delete'])){
             <option value="pending">pending</option>
             <option value="completed">completed</option>
          </select>
-         <div class="flex-btn">
+        <div class="flex-btn">
          <input type="submit" value="update" class="option-btn" name="update_payment">
-            <a href="placed_orders.php?delete=<?= $fetch_orders['id']; ?>" class="delete-btn" onclick="return confirm('delete this order?');">delete</a>
-         </div>
+         <a href="placed_orders.php?delete=<?= $fetch_orders['id']; ?>" class="delete-btn" onclick="return confirm('delete this order?');">delete</a>
+        </div>
       </form>
    </div>
    <?php

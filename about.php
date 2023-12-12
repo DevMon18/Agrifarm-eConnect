@@ -1,6 +1,6 @@
 <?php
 
-require_once 'components/connect.php';
+include 'components/connect.php';
 
 session_start();
 
@@ -31,7 +31,7 @@ if(isset($_SESSION['user_id'])){
 </head>
 <body>
    
-<?php require_once 'components/user_header.php'; ?>
+<?php include 'components/user_header.php'; ?>
 
 <section class="about">
 
@@ -144,7 +144,16 @@ if(isset($_SESSION['user_id'])){
    </div>
 
 </section>
-<?php require_once 'components/footer.php'; ?>
+
+
+
+
+
+
+
+
+
+<?php include 'components/footer.php'; ?>
 
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 
@@ -161,13 +170,13 @@ var swiper = new Swiper(".reviews-slider", {
    },
    breakpoints: {
       0: {
-         slidesPerView:1,
+        slidesPerView:1,
       },
       768: {
-         slidesPerView: 2,
+        slidesPerView: 2,
       },
       991: {
-         slidesPerView: 3,
+        slidesPerView: 3,
       },
    },
 });

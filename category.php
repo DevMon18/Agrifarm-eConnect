@@ -1,6 +1,6 @@
 <?php
 
-require_once 'components/connect.php';
+include 'components/connect.php';
 
 session_start();
 
@@ -10,7 +10,7 @@ if(isset($_SESSION['user_id'])){
    $user_id = '';
 };
 
-require_once 'components/wishlist_cart.php';
+include 'components/wishlist_cart.php';
 
 ?>
 
@@ -31,7 +31,7 @@ require_once 'components/wishlist_cart.php';
 </head>
 <body>
    
-<?php require_once 'components/user_header.php'; ?>
+<?php include 'components/user_header.php'; ?>
 
 <section class="products">
 
@@ -84,7 +84,7 @@ require_once 'components/wishlist_cart.php';
 
 
 
-<?php require_once 'components/footer.php'; ?>
+<?php include 'components/footer.php'; ?>
 
 <script src="js/script.js"></script>
 

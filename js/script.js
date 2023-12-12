@@ -1,5 +1,5 @@
-const navbar = document.querySelector('.header .flex .navbar');
-const profile = document.querySelector('.header .flex .profile');
+let navbar = document.querySelector('.header .flex .navbar');
+let profile = document.querySelector('.header .flex .profile');
 
 document.querySelector('#menu-btn').onclick = () =>{
    navbar.classList.toggle('active');
@@ -16,8 +16,8 @@ window.onscroll = () =>{
    profile.classList.remove('active');
 }
 
-const mainImage = document.querySelector('.quick-view .box .row .image-container .main-image img');
-const subImages = document.querySelectorAll('.quick-view .box .row .image-container .sub-image img');
+let mainImage = document.querySelector('.quick-view .box .row .image-container .main-image img');
+let subImages = document.querySelectorAll('.quick-view .box .row .image-container .sub-image img');
 
 subImages.forEach(images =>{
    images.onclick = () =>{

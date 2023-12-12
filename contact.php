@@ -1,6 +1,6 @@
 <?php
 
-require_once 'components/connect.php';
+include 'components/connect.php';
 
 session_start();
 
@@ -57,16 +57,16 @@ if(isset($_POST['send'])){
 </head>
 <body>
    
-<?php require_once 'components/user_header.php'; ?>
+<?php include 'components/user_header.php'; ?>
 
 <section class="contact">
 
    <form action="" method="post">
-      <h3>Get in touch</h3>
-      <input type="text" name="name" placeholder="Name" required maxlength="20" class="form-control">
-      <input type="email" name="email" placeholder="Email" required maxlength="50" class="form-control">
-      <input type="number" name="number" min="0" max="11" placeholder="Number" required onkeypress="if(this.value.length == 10) return false;" class="form-control">
-      <textarea name="msg" class="form-control" placeholder="Message" cols="30" rows="10"></textarea>
+      <h3>get in touch</h3>
+      <input type="text" name="name" placeholder="enter your name" required maxlength="20" class="box">
+      <input type="email" name="email" placeholder="enter your email" required maxlength="50" class="box">
+      <input type="number" name="number" min="0" max="9999999999" placeholder="enter your number" required onkeypress="if(this.value.length == 10) return false;" class="box">
+      <textarea name="msg" class="box" placeholder="enter your message" cols="30" rows="10"></textarea>
       <input type="submit" value="send message" name="send" class="btn">
    </form>
 
@@ -84,7 +84,7 @@ if(isset($_POST['send'])){
 
 
 
-<?php require_once 'components/footer.php'; ?>
+<?php include 'components/footer.php'; ?>
 
 <script src="js/script.js"></script>
 

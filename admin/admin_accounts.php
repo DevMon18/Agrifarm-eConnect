@@ -1,6 +1,6 @@
 <?php
 
-require_once '../components/connect.php';
+include '../components/connect.php';
 
 session_start();
 
@@ -34,7 +34,7 @@ if(isset($_GET['delete'])){
 </head>
 <body>
 
-<?php require_once '../components/admin_header.php'; ?>
+<?php include '../components/admin_header.php'; ?>
 
 <section class="accounts">
 
@@ -75,6 +75,18 @@ if(isset($_GET['delete'])){
    </div>
 
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
 <script src="../js/admin_script.js"></script>
    
 </body>
