@@ -55,11 +55,13 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `users` (
-  `id` int(100) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `email` varchar(250) NOT NULL,
+  `address` varchar(250) NOT NULL,
+  `contact` int(11) NOT NULL,
+  `password` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `wishlist` (
   `id` int(100) NOT NULL,

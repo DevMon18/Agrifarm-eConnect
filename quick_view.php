@@ -38,10 +38,10 @@ require_once 'components/wishlist_cart.php';
    <h1 class="heading">quick view</h1>
 
    <?php
-     $pid = $_GET['pid'];
-     $select_products = $conn->prepare("SELECT * FROM `products` WHERE id = ?"); 
-     $select_products->execute([$pid]);
-     if($select_products->rowCount() > 0){
+      $pid = $_GET['pid'];
+      $select_products = $conn->prepare("SELECT * FROM `products` WHERE id = ?"); 
+      $select_products->execute([$pid]);
+      if($select_products->rowCount() > 0){
       while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
    ?>
    <form action="" method="post" class="box">
