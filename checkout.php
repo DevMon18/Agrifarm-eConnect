@@ -12,19 +12,18 @@ if (isset($_SESSION['user_id'])) {
    header('location:user_login.php');
 }
 ;
-// Fetch user information from the database based on $user_id
+$response = [];
+
 $select_user_info = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
 $select_user_info->execute([$user_id]);
 
 if ($select_user_info->rowCount() > 0) {
    $user_data = $select_user_info->fetch(PDO::FETCH_ASSOC);
-   // Assign user data to variables
    $name = $user_data['name'];
    $email = $user_data['email'];
    $contact = $user_data['contact'];
    $address = $user_data['address'];
 } else {
-   // Set default values if user information is not found
    $name = '';
    $email = '';
    $contact = '';
@@ -36,7 +35,7 @@ if (isset($_POST['order'])) {
    $name = $_POST['name'];
    $email = $_POST['email'];
    $address = $_POST['address'];
-   $contact = $_POST['contact'];
+   $number = $_POST['number'];
    $total_products = $_POST['total_products'];
    $total_price = $_POST['total_price'];
 
@@ -45,18 +44,25 @@ if (isset($_POST['order'])) {
 
    if ($check_cart->rowCount() > 0) {
 
-      $insert_order = $conn->prepare("INSERT INTO `orders`(id, name, number, email, method, address, total_products, total_price) VALUES(?,?,?,?,?,?,?,?)");
-      $insert_order->execute([$user_id, $name, $number, $email, $method, $address, $total_products, $total_price]);
+      $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, email, address,  number, total_products, total_price) VALUES(?,?,?,?,?,?,?)");
+      $insert_order->execute([$user_id, $name, $email, $address, $number, $total_products, $total_price]);
 
       $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
       $delete_cart->execute([$user_id]);
-
-      $message[] = 'order placed successfully!';
-   } else {
-      $message[] = 'your cart is empty';
+      $response = [
+         'icon' => 'success',
+         'title' => 'Order Place Successfully!'
+      ];
    }
 
+} else {
+   $response = [
+      'icon' => 'success',
+      'title' => 'Empty Cart!'
+   ];
 }
+
+$responseJSON = json_encode($response);
 
 
 ?>
@@ -69,11 +75,9 @@ if (isset($_POST['order'])) {
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>checkout</title>
-
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
-   <!-- custom css file link  -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
    <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -81,97 +85,147 @@ if (isset($_POST['order'])) {
 <body>
 
    <?php require_once 'components/user_header.php'; ?>
+   <form action="" method="POST">
+      <div class="container mt-5 mb-5">
+         <div class="row justify-content-center">
+            <div class="col-md-9">
+               <div class="card">
+                  <div class="card-body">
+                     <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-secondary btn-lg">Your Orders</button>
+                        <div class="display-orders">
+                           <input type="hidden" name="total_products" value="<?= $total_products; ?>">
+                           <input type="hidden" name="total_price" value="<?= $grand_total; ?>" value="">
 
-   <section class="checkout-orders">
+                           <div class="row mt-4">
+                              <div class="col">
+                                 <?php
+                                 $grand_total = 0;
+                                 $cart_items[] = '';
+                                 $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
+                                 $select_cart->execute([$user_id]);
+                                 if ($select_cart->rowCount() > 0) {
+                                    while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
+                                       $cart_items[] = $fetch_cart['name'] . ' (' . $fetch_cart['price'] . ' x ' . $fetch_cart['quantity'] . ') - ';
+                                       $total_products = implode($cart_items);
+                                       $grand_total += ($fetch_cart['price'] * $fetch_cart['quantity']);
+                                       ?>
+                                       <h5 class="text-dark mt-2">
+                                          <?= $fetch_cart['name']; ?> <span class="text-primary">(
+                                             <?= '₱' . $fetch_cart['price'] . ' x ' . $fetch_cart['quantity']; ?>)
+                                          </span>
+                                       </h5>
+                                       <?php
+                                    }
+                                 } else {
+                                    echo '<p class="empty">your cart is empty!</p>';
+                                 }
+                                 ?>
+                                 <h5 class="grand-total text-dark">Grand total : <span class="text-primary">₱
+                                       <?= $grand_total; ?>
+                                    </span></h5>
+                              </div>
+                              <div class="col">
+                                 <img src="images/QR.jpg" class="img-fluid mb-4" style="height: 150px; width: 150px;">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="d-grid gap-2">
+                        <button class="btn btn-secondary btn-lg">Place your Orders</button>
+                     </div>
 
-      <form action="" method="POST">
-
-         <h3>your orders</h3>
-
-         <div class="display-orders">
-            <?php
-            $grand_total = 0;
-            $cart_items[] = '';
-            $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
-            $select_cart->execute([$user_id]);
-            if ($select_cart->rowCount() > 0) {
-               while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
-                  $cart_items[] = $fetch_cart['name'] . ' (' . $fetch_cart['price'] . ' x ' . $fetch_cart['quantity'] . ') - ';
-                  $total_products = implode($cart_items);
-                  $grand_total += ($fetch_cart['price'] * $fetch_cart['quantity']);
-                  ?>
-                  <p>
-                     <?= $fetch_cart['name']; ?> <span>(
-                        <?= '₱' . $fetch_cart['price'] . '/- x ' . $fetch_cart['quantity']; ?>)
-                     </span>
-                  </p>
-                  <?php
-               }
-            } else {
-               echo '<p class="empty">your cart is empty!</p>';
-            }
-            ?>
-            <input type="hidden" name="total_products" value="<?= $total_products; ?>">
-            <input type="hidden" name="total_price" value="<?= $grand_total; ?>" value="">
-            <div class="grand-total">grand total : <span>₱
-                  <?= $grand_total; ?>/-
-               </span></div>
+                     <div class="row">
+                        <div class="col">
+                           <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Name</label>
+                              <input type="text" class="form-control" name="name"
+                                 value="<?= isset($name) ? htmlspecialchars($name) : ''; ?>" class="form-control">
+                           </div>
+                        </div>
+                        <div class="col">
+                           <div class="mb-3">
+                              <label for="exampleInputPassword1" class="form-label">Email</label>
+                              <input type="email" class="form-control" name="email"
+                                 value="<?= isset($email) ? htmlspecialchars($email) : ''; ?>" class="form-control"
+                                 oninput="this.value = this.value.replace(/\s/g, '')" required>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col">
+                           <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Address</label>
+                              <input type="text" class="form-control" name="address"
+                                 value="<?= isset($address) ? htmlspecialchars($address) : ''; ?>" class="form-control"
+                                 required>
+                           </div>
+                        </div>
+                        <div class="col">
+                           <div class="mb-3">
+                              <label for="exampleInputPassword1" class="form-label">Contact No</label>
+                              <input type="number" name="number"
+                                 value="<?= isset($contact) ? htmlspecialchars($contact) : ''; ?>" class="form-control"
+                                 required>
+                           </div>
+                        </div>
+                        <div class="mb-3">
+                           <label for="exampleInputPassword1" class="form-label">Reference No</label>
+                           <input type="number" name="contact" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="input-group mb-3 mt-2">
+                        <label class="input-group-text" for="inputGroupSelect01">Payment</label>
+                        <select class="form-select" id="inputGroupSelect01" required>
+                           <option selected>Choose...</option>
+                           <option value="cash on delivery">cash on delivery</option>
+                           <option value="credit card">credit card</option>
+                           <option value="paytm">paytm</option>
+                           <option value="paypal">paypal</option>
+                        </select>
+                     </div>
+                     <div class="d-grid gap-2">
+                        <button type="submit" name="order"
+                           class="btn btn-primary <?= ($grand_total > 1) ? '' : 'disabled'; ?>">Place Order</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
          </div>
-
-         <h3>place your orders</h3>
-
-
-         <div class="flex">
-            <div class="inputBox">
-               <span>Full Name</span>
-               <input type="text" name="name" value="<?= isset($name) ? htmlspecialchars($name) : ''; ?>" class="form-chk" required>
-            </div>
-            <div class="inputBox">
-               <span>Contact No.</span>
-               <input type="number" name="number" value="<?= isset($contact) ? htmlspecialchars($contact) : ''; ?>" class="form-chk" required>
-            </div>
-            <div class="inputBox">
-               <span>Email</span>
-               <input type="email" name="email" value="<?= isset($email) ? htmlspecialchars($email) : ''; ?>" class="form-chk" required>
-            </div>
-            <div class="inputBox">
-               <span>Payment method</span>
-               <select name="method" class="form-chk" required>
-                  <option value="cash on delivery">cash on delivery</option>
-                  <option value="credit card">credit card</option>
-                  <option value="paytm">paytm</option>
-                  <option value="paypal">paypal</option>
-               </select>
-            </div>
-            <div class="inputBox">
-               <span>Address</span>
-               <input type="text" name="flat" value="<?= isset($address) ? htmlspecialchars($address) : ''; ?>" class="form-chk" maxlength="50"
-                  required>
-            </div>
-         </div>
-
-         <input type="submit" name="order" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" value="place order">
-
-      </form>
-
-   </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
+      </div>
+      </div>
+   </form>
    <?php require_once 'components/footer.php'; ?>
-
+   <?php require_once 'components/scripts.php'; ?>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    <script src="js/script.js"></script>
+   <script>
+      const response = <?php echo $responseJSON; ?>;
 
+      const showAlert = (response) => {
+         switch (response.icon) {
+            case 'success':
+               Swal.fire({
+                  icon: response.icon,
+                  title: response.title
+               });
+               break;
+            case 'error':
+               Swal.fire({
+                  icon: response.icon,
+                  title: response.title,
+               });
+               break;
+            default:
+               alert(response.text);
+               break;
+         }
+      };
+      showAlert(response);
+   </script>
 </body>
 
 </html>

@@ -4,13 +4,14 @@ require_once 'components/connect.php';
 
 session_start();
 
-if(isset($_SESSION['user_id'])){
+if (isset($_SESSION['user_id'])) {
    $user_id = $_SESSION['user_id'];
-}else{
+} else {
    $user_id = '';
-};
+}
+;
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
 
    $name = $_POST['name'];
    $name = filter_var($name, FILTER_SANITIZE_STRING);
@@ -29,75 +30,67 @@ if(isset($_POST['submit'])){
    $cpass = sha1($_POST['cpass']);
    $cpass = filter_var($cpass, FILTER_SANITIZE_STRING);
 
-   if($old_pass == $empty_pass){
+   if ($old_pass == $empty_pass) {
       $message[] = 'please enter old password!';
-   }elseif($old_pass != $prev_pass){
+   } elseif ($old_pass != $prev_pass) {
       $message[] = 'old password not matched!';
-   }elseif($new_pass != $cpass){
+   } elseif ($new_pass != $cpass) {
       $message[] = 'confirm password not matched!';
-   }else{
-      if($new_pass != $empty_pass){
+   } else {
+      if ($new_pass != $empty_pass) {
          $update_admin_pass = $conn->prepare("UPDATE `users` SET password = ? WHERE id = ?");
          $update_admin_pass->execute([$cpass, $user_id]);
          $message[] = 'password updated successfully!';
-      }else{
+      } else {
          $message[] = 'please enter a new password!';
       }
    }
-   
+
 }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>register</title>
-   
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
-   <!-- custom css file link  -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
    <link rel="stylesheet" href="css/style.css">
 
 </head>
+
 <body>
-   
-<?php require_once 'components/user_header.php'; ?>
 
-<section class="form-container">
+   <?php require_once 'components/user_header.php'; ?>
 
-   <form action="" method="post">
-      <h3>update now</h3>
-      <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
-      <input type="text" name="name" required placeholder="enter your username" maxlength="20"  class="box" value="<?= $fetch_profile["name"]; ?>">
-      <input type="email" name="email" required placeholder="enter your email" maxlength="50"  class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>">
-      <input type="password" name="old_pass" placeholder="enter your old password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="new_pass" placeholder="enter your new password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="cpass" placeholder="confirm your new password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="submit" value="update now" class="btn" name="submit">
-   </form>
+   <section class="form-container">
 
-</section>
+      <form action="" method="post">
+         <h3>update now</h3>
+         <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
+         <input type="text" name="name" required placeholder="enter your username" maxlength="20" class="box"
+            value="<?= $fetch_profile["name"]; ?>">
+         <input type="email" name="email" required placeholder="enter your email" maxlength="50" class="box"
+            oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>">
+         <input type="password" name="old_pass" placeholder="enter your old password" maxlength="20" class="box"
+            oninput="this.value = this.value.replace(/\s/g, '')">
+         <input type="password" name="new_pass" placeholder="enter your new password" maxlength="20" class="box"
+            oninput="this.value = this.value.replace(/\s/g, '')">
+         <input type="password" name="cpass" placeholder="confirm your new password" maxlength="20" class="box"
+            oninput="this.value = this.value.replace(/\s/g, '')">
+         <input type="submit" value="update now" class="btn" name="submit">
+      </form>
 
+   </section>
+   <?php require_once 'components/footer.php'; ?>
 
-
-
-
-
-
-
-
-
-
-
-
-<?php require_once 'components/footer.php'; ?>
-
-<script src="js/script.js"></script>
+   <script src="js/script.js"></script>
 
 </body>
+
 </html>

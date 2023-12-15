@@ -1,14 +1,16 @@
 <?php
 
+require_once 'components/header.php';
 require_once 'components/connect.php';
 
 session_start();
 
-if(isset($_SESSION['user_id'])){
+if (isset($_SESSION['user_id'])) {
    $user_id = $_SESSION['user_id'];
-}else{
+} else {
    $user_id = '';
-};
+}
+;
 
 require_once 'components/wishlist_cart.php';
 
@@ -16,237 +18,171 @@ require_once 'components/wishlist_cart.php';
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Agrifarm</title>
-
    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
-   
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
-   <!-- custom css file link  -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
    <link rel="stylesheet" href="css/style.css">
-
-
 </head>
 <body>
-   
-<?php require_once 'components/user_header.php'; ?>
-
-<div class="home-">
-
-<section class="home">
-
-   <div class="swiper home-slider">
-   
-   <div class="swiper-wrapper">
-
-      <div class="swiper-slide slide">
-         <div class="image">
-            <img src="images/HO1.png" alt="">
+   <?php require_once 'components/user_header.php'; ?>
+   <div class="home-">
+      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+         <div class="carousel-inner">
+            <div class="carousel-item active">
+               <img src="images/1.png" class="d-block w-100" alt="main">
+            </div>
+            <div class="carousel-item">
+               <img src="images/2.png" class="d-block w-100" alt="secondary">
+            </div>
+            <div class="carousel-item">
+               <img src="images/3.png" class="d-block w-100" alt="tertairy">
+            </div>
          </div>
-         <!-- <div class="content">
-            <span></span>
-            <h3></h3>
-            <a href="shop.php" class="btn">shop now</a>
-         </div>
+         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+         </button>
+         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+         </button>
       </div>
-
-      <div class="swiper-slide slide">
-         <div class="image">
-            <img src="images/home-img-2.png" alt="">
+      <section class="category">
+         <h1 class="heading">shop by category</h1>
+         <div class="swiper category-slider">
+            <div class="swiper-wrapper">
+               <a href="category.php?category=laptop" class="swiper-slide slide">
+                  <img src="images/utan.jpg" alt="">
+                  <h3 class="text-dark text-capitalize text-decoration-none">Veggies</h3>
+               </a>
+               <a href="category.php?category=tv" class="swiper-slide slide">
+                  <img src="images/lamas.jpg" alt="">
+                  <h3 class="text-dark text-capitalize text-decoration-none">Root crops</h3>
+               </a>
+               <a href="category.php?category=camera" class="swiper-slide slide">
+                  <img src="images/live.jpg" alt="">
+                  <h3 class="text-dark text-capitalize text-decoration-none">Live stock</h3>
+               </a>
+            </div>
+            <div class="swiper-pagination"></div>
          </div>
-         <div class="content">
-            <span></span>
-            <h3></h3>
-            <a href="shop.php" class="btn">shop now</a>
+      </section>
+      <section class="home-products">
+         <h1 class="heading">latest products</h1>
+         <div class="swiper products-slider">
+            <div class="swiper-wrapper">
+               <?php
+               $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 6");
+               $select_products->execute();
+               if ($select_products->rowCount() > 0) {
+                  while ($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)) {
+                     ?>
+                     <form action="" method="post" class="swiper-slide slide">
+                        <input type="hidden" name="pid" value="<?= $fetch_product['id']; ?>">
+                        <input type="hidden" name="name" value="<?= $fetch_product['name']; ?>">
+                        <input type="hidden" name="price" value="<?= $fetch_product['price']; ?>">
+                        <input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
+                        <button class="bi bi-heart-fill" type="submit" name="add_to_wishlist"></button>
+                        <a href="quick_view.php?pid=<?= $fetch_product['id']; ?>" class="bi bi-eye-fill"></a>
+                        <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="">
+                        <h3 class="text-dark name">
+                           <?= $fetch_product['name']; ?>
+                        </h3>
+                        <div class="flex">
+                           <h5 class="text-primary price"><span>₱</span>
+                              <?= $fetch_product['price']; ?><span></span>
+                           </h5>
+                           <input type="number" name="qty" class="form-control" style="width: 60px;" min="1" max="99"
+                              onkeypress="if(this.value.length == 2) return false;" value="1">
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3" name="add_to_cart">Add to Cart</button>
+                     </form>
+                     <?php
+                  }
+               } else {
+                  echo '<p class="empty">no products added yet!</p>';
+               }
+               ?>
+
+            </div>
+
+            <div class="swiper-pagination"></div>
+
          </div>
-      </div>
 
-      <div class="swiper-slide slide">
-         <div class="image">
-            <img src="images/home-img-3.png" alt="">
-         </div>
-         <div class="content">
-            <span></span>
-            <h3></h3>
-            <a href="shop.php" class="btn">shop now</a>
-         </div>
-      </div>
+      </section>
 
-   </div>
+      <?php require_once 'components/scripts.php'; ?>
+      <?php require_once 'components/footer.php'; ?>
 
-      <div class="swiper-pagination"></div>
+      <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 
-   </div> -->
-</section>
+      <script src="js/script.js"></script>
 
-</div>
+      <script>
 
-<section class="category">
+         var swiper = new Swiper(".home-slider", {
+            loop: true,
+            spaceBetween: 20,
+            pagination: {
+               el: ".swiper-pagination",
+               clickable: true,
+            },
+         });
 
-   <h1 class="heading">shop by category</h1>
+         var swiper = new Swiper(".category-slider", {
+            loop: true,
+            spaceBetween: 20,
+            pagination: {
+               el: ".swiper-pagination",
+               clickable: true,
+            },
+            breakpoints: {
+               0: {
+                  slidesPerView: 2,
+               },
+               650: {
+                  slidesPerView: 3,
+               },
+               768: {
+                  slidesPerView: 4,
+               },
+               1024: {
+                  slidesPerView: 5,
+               },
+            },
+         });
 
-   <div class="swiper category-slider">
+         var swiper = new Swiper(".products-slider", {
+            loop: true,
+            spaceBetween: 20,
+            pagination: {
+               el: ".swiper-pagination",
+               clickable: true,
+            },
+            breakpoints: {
+               550: {
+                  slidesPerView: 2,
+               },
+               768: {
+                  slidesPerView: 2,
+               },
+               1024: {
+                  slidesPerView: 3,
+               },
+            },
+         });
 
-   <div class="swiper-wrapper">
-
-   <a href="category.php?category=laptop" class="swiper-slide slide">
-      <img src="images/utan.jpg" alt="">
-      <h3>Veggies</h3>
-   </a>
-
-   <a href="category.php?category=tv" class="swiper-slide slide">
-      <img src="images/lamas.jpg" alt="">
-      <h3>Root crops</h3>
-   </a>
-
-   <a href="category.php?category=camera" class="swiper-slide slide">
-      <img src="images/live.jpg" alt="">
-      <h3>Live stock</h3>
-   </a>
-
-   <!-- <a href="category.php?category=mouse" class="swiper-slide slide">
-      <img src="images/icon-4.png" alt="">
-      <h3>mouse</h3>
-   </a>
-
-   <a href="category.php?category=fridge" class="swiper-slide slide">
-      <img src="images/icon-5.png" alt="">
-      <h3>fridge</h3>
-   </a>
-
-   <a href="category.php?category=washing" class="swiper-slide slide">
-      <img src="images/icon-6.png" alt="">
-      <h3>washing machine</h3>
-   </a> -->
-
-
-
-   </div>
-
-   <div class="swiper-pagination"></div>
-
-   </div>
-
-</section>
-
-<section class="home-products">
-
-   <h1 class="heading">latest products</h1>
-
-   <div class="swiper products-slider">
-
-   <div class="swiper-wrapper">
-
-   <?php
-     $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 6"); 
-      $select_products->execute();
-      if($select_products->rowCount() > 0){
-      while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
-   ?>
-   <form action="" method="post" class="swiper-slide slide">
-      <input type="hidden" name="pid" value="<?= $fetch_product['id']; ?>">
-      <input type="hidden" name="name" value="<?= $fetch_product['name']; ?>">
-      <input type="hidden" name="price" value="<?= $fetch_product['price']; ?>">
-      <input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
-      <button class="fas fa-heart" type="submit" name="add_to_wishlist"></button>
-      <a href="quick_view.php?pid=<?= $fetch_product['id']; ?>" class="fas fa-eye"></a>
-      <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="">
-      <div class="name"><?= $fetch_product['name']; ?></div>
-      <div class="flex">
-         <div class="price"><span>₱</span><?= $fetch_product['price']; ?><span>/-</span></div>
-         <input type="number" name="qty" class="form-qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
-      </div>
-      <input type="submit" value="add to cart" class="btn" name="add_to_cart">
-   </form>
-   <?php
-      }
-   }else{
-      echo '<p class="empty">no products added yet!</p>';
-   }
-   ?>
-
-   </div>
-
-   <div class="swiper-pagination"></div>
-
-   </div>
-
-</section>
-
-
-
-
-
-
-
-
-
-<?php require_once 'components/footer.php'; ?>
-
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-
-<script src="js/script.js"></script>
-
-<script>
-
-var swiper = new Swiper(".home-slider", {
-   loop:true,
-   spaceBetween: 20,
-   pagination: {
-      el: ".swiper-pagination",
-      clickable:true,
-   },
-});
-
-var swiper = new Swiper(".category-slider", {
-   loop:true,
-   spaceBetween: 20,
-   pagination: {
-      el: ".swiper-pagination",
-      clickable:true,
-   },
-   breakpoints: {
-      0: {
-         slidesPerView: 2,
-       },
-      650: {
-        slidesPerView: 3,
-      },
-      768: {
-        slidesPerView: 4,
-      },
-      1024: {
-        slidesPerView: 5,
-      },
-   },
-});
-
-var swiper = new Swiper(".products-slider", {
-   loop:true,
-   spaceBetween: 20,
-   pagination: {
-      el: ".swiper-pagination",
-      clickable:true,
-   },
-   breakpoints: {
-      550: {
-        slidesPerView: 2,
-      },
-      768: {
-        slidesPerView: 2,
-      },
-      1024: {
-        slidesPerView: 3,
-      },
-   },
-});
-
-</script>
+      </script>
 
 </body>
+
 </html>

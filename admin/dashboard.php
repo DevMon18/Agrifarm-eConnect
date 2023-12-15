@@ -1,5 +1,6 @@
 <?php
 
+require_once 'header.php';
 require_once '../components/connect.php';
 
 session_start();

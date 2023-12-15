@@ -4,114 +4,137 @@ require_once 'components/connect.php';
 
 session_start();
 
-if(isset($_SESSION['user_id'])){
+if (isset($_SESSION['user_id'])) {
    $user_id = $_SESSION['user_id'];
-}else{
+} else {
    $user_id = '';
    header('location:user_login.php');
-};
+}
+;
 
-if(isset($_POST['delete'])){
+$response = []; 
+
+if (isset($_POST['delete'])) {
    $cart_id = $_POST['cart_id'];
    $delete_cart_item = $conn->prepare("DELETE FROM `cart` WHERE id = ?");
    $delete_cart_item->execute([$cart_id]);
 }
 
-if(isset($_GET['delete_all'])){
+if (isset($_GET['delete_all'])) {
    $delete_cart_item = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
    $delete_cart_item->execute([$user_id]);
    header('location:cart.php');
 }
 
-if(isset($_POST['update_qty'])){
+if (isset($_POST['update_qty'])) {
    $cart_id = $_POST['cart_id'];
    $qty = $_POST['qty'];
    $qty = filter_var($qty, FILTER_SANITIZE_STRING);
    $update_qty = $conn->prepare("UPDATE `cart` SET quantity = ? WHERE id = ?");
    $update_qty->execute([$qty, $cart_id]);
-   $message[] = 'cart quantity updated';
+   $response = [
+      'icon' => 'success',
+      'title' => 'Quantity Updated!'
+   ];
 }
 
+$responseJSON = json_encode($response);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>shopping cart</title>
-   
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
-   <!-- custom css file link  -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
    <link rel="stylesheet" href="css/style.css">
-
 </head>
 <body>
-   
-<?php require_once 'components/user_header.php'; ?>
-
-<section class="products shopping-cart">
-
-   <h3 class="heading">shopping cart</h3>
-
-   <div class="box-container">
-
-   <?php
-      $grand_total = 0;
-      $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
-      $select_cart->execute([$user_id]);
-      if($select_cart->rowCount() > 0){
-         while($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)){
-   ?>
-   <form action="" method="post" class="box">
-      <input type="hidden" name="cart_id" value="<?= $fetch_cart['id']; ?>">
-      <a href="quick_view.php?pid=<?= $fetch_cart['pid']; ?>" class="fas fa-eye"></a>
-      <img src="uploaded_img/<?= $fetch_cart['image']; ?>" alt="">
-      <div class="name"><?= $fetch_cart['name']; ?></div>
-      <div class="flex">
-         <div class="price">₱<?= $fetch_cart['price']; ?>/-</div>
-         <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
-         <button type="submit" class="fas fa-edit" name="update_qty"></button>
+   <?php require_once 'components/user_header.php'; ?>
+   <section class="products shopping-cart">
+      <h3 class="heading">shopping cart</h3>
+      <div class="box-container">
+         <?php
+         $grand_total = 0;
+         $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
+         $select_cart->execute([$user_id]);
+         if ($select_cart->rowCount() > 0) {
+            while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
+               ?>
+               <form action="" method="post" class="box">
+                  <input type="hidden" name="cart_id" value="<?= $fetch_cart['id']; ?>">
+                  <a href="quick_view.php?pid=<?= $fetch_cart['pid']; ?>" class="bi bi-eye-fill"></a>
+                  <img src="uploaded_img/<?= $fetch_cart['image']; ?>" alt="">
+                  <h3 class="text-dark name">
+                     <?= $fetch_cart['name']; ?>
+                  </h3>
+                  <div class="flex">
+                     <h5 class="text-primary price">₱
+                        <?= $fetch_cart['price']; ?>
+                     </h5>
+                     <input type="number" name="qty" class="form-control" style="width: 60px;" min="1" max="99"
+                        onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>" required>
+                     <button type="submit" class="btn btn-primary" name="update_qty"><i class="bi bi-pen-fill"></i></button>
+                  </div>
+                  <h5 class="text-dark sub-total"> Subtotal : <span class="text-primary">₱
+                        <?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?>
+                     </span></h5>
+                  <button type="submit" class="btn btn-danger" name="delete"
+                     onclick="return confirm('delete this from cart?');">Delete Item</button>
+               </form>
+               <?php
+               $grand_total += $sub_total;
+            }
+         } else {
+            echo '<p class="empty">your cart is empty</p>';
+         }
+         ?>
       </div>
-      <div class="sub-total"> sub total : <span>₱<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?>/-</span> </div>
-      <input type="submit" value="delete item" onclick="return confirm('delete this from cart?');" class="delete-btn" name="delete">
-   </form>
-   <?php
-   $grand_total += $sub_total;
-      }
-   }else{
-      echo '<p class="empty">your cart is empty</p>';
-   }
-   ?>
-   </div>
+      <div class="container mt-5 mb-5">
+         <div class="row justify-content-center">
+            <div class="col-md-4">
+               <div class="card">
+                  <div class="card-body">
+                     <p>grand total : <span>$
+                           <?= $grand_total; ?>
+                        </span></p>
+                     <div class="d-grid gap-2">
+                        <a href="shop.php" class="btn btn-outline-secondary">Continue shopping</a>
+                        <a href="cart.php?delete_all"
+                           class="btn btn-danger <?= ($grand_total > 1) ? '' : 'disabled'; ?>"
+                           onclick="return confirm('delete all from cart?');">Delete all item</a>
+                        <a href="checkout.php"
+                           class="btn btn-primary <?= ($grand_total > 1) ? '' : 'disabled'; ?>">Proceed to checkout</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <?php require_once 'components/footer.php'; ?>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script src="js/script.js"></script>
+   <script>
+      const response = <?php echo $responseJSON; ?>;
 
-   <div class="cart-total">
-      <p>grand total : <span>$<?= $grand_total; ?>/-</span></p>
-      <a href="shop.php" class="option-btn">continue shopping</a>
-      <a href="cart.php?delete_all" class="delete-btn <?= ($grand_total > 1)?'':'disabled'; ?>" onclick="return confirm('delete all from cart?');">delete all item</a>
-      <a href="checkout.php" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>">proceed to checkout</a>
-   </div>
-
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php require_once 'components/footer.php'; ?>
-
-<script src="js/script.js"></script>
-
+      const showAlert = (response) => {
+         switch (response.icon) {
+            case 'success':
+               Swal.fire({
+                  icon: response.icon,
+                  title: response.title
+               });
+               break;
+            }
+      };
+      showAlert(response);
+   </script>
 </body>
+
 </html>

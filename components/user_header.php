@@ -14,15 +14,14 @@
 <header class="header">
 
    <section class="flex">
-
-      <a href="index.php" class="logo">Agrifarm e-Connect<span></span></a>
+      <a href="index.php" class="logo text-decoration-none">Agrifarm e-Connect<span></span></a>
 
       <nav class="navbar">
-         <a href="index.php">Home</a>
-         <a href="shop.php">Shop</a>
-         <a href="orders.php">Orders</a>
-         <a href="about.php">About</a>
-         <a href="contact.php">Contact us</a>
+         <a href="index.php" class="text-decoration-none">Home</a>
+         <a href="shop.php" class="text-decoration-none">Shop</a>
+         <a href="orders.php" class="text-decoration-none">Orders</a>
+         <a href="about.php" class="text-decoration-none">About</a>
+         <a href="contact.php" class="text-decoration-none">Contact us</a>
       </nav>
 
       <div class="icons">
@@ -35,34 +34,34 @@
             $count_cart_items->execute([$user_id]);
             $total_cart_counts = $count_cart_items->rowCount();
          ?>
-         <div id="menu-btn" class="fas fa-bars"></div>
-         <a href="search_page.php"><i class="fas fa-search"></i></a>
-         <a href="wishlist.php"><i class="fas fa-heart"></i><span>(<?= $total_wishlist_counts; ?>)</span></a>
-         <a href="cart.php"><i class="fas fa-shopping-cart"></i><span>(<?= $total_cart_counts; ?>)</span></a>
-         <div id="user-btn" class="fas fa-user"></div>
+         <div id="menu-btn" class="bi bi-list"></div>
+         <a href="search_page.php" class="text-decoration-none"><i class="bi bi-search"></i></a>
+         <a href="wishlist.php" class="text-decoration-none"><i class="bi bi-heart-fill"></i><span> <?= $total_wishlist_counts; ?></span></a>
+         <a href="cart.php" class="text-decoration-none"><i class="bi bi-cart-check-fill"></i><span> <?= $total_cart_counts; ?></span></a>
+         <div id="user-btn" class="fas bi bi-person-fill"></div>
       </div>
 
-      <div class="profile">
+      <div class="card rounded-lg w-25">
          <?php          
             $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
             $select_profile->execute([$user_id]);
             if($select_profile->rowCount() > 0){
             $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
          ?>
-         <p><?= $fetch_profile["name"]; ?></p>
-         <a href="update_user.php" class="btn">update profile</a>
-         <div class="flex-btn">
-            <a href="user_register.php" class="option-btn">register</a>
-            <a href="user_login.php" class="option-btn">login</a>
+         <h6 class="text-dark text-center mb-3"><?= $fetch_profile["name"]; ?></h6>
+         <div class="d-grid gap-2">
+            <a href="update_user.php" class="btn btn-success">Update</a>
+            <button type="submit" href="user_register.php" class="btn btn-primary">Sign in</button>
+            <button type="submit" href="user_login.php" class="btn btn-outline-secondary">Login</button>
+            <a href="components/user_logout.php" class="btn btn-danger" onclick="return confirm('logout from the website?');">Logout</a> 
          </div>
-         <a href="components/user_logout.php" class="delete-btn" onclick="return confirm('logout from the website?');">logout</a> 
          <?php
             }else{
          ?>
-         <p>please login or register first!</p>
-         <div class="flex-btn">
-            <a href="user_register.php" class="option-btn">register</a>
-            <a href="user_login.php" class="option-btn">login</a>
+         <h6 class="text-dark text-center mb-3">Please login or register first!</h6>
+         <div class="d-grid gap-2">
+            <a href="user_register.php" class="btn btn-primary">Sign in</a>
+            <a href="user_login.php" class="btn btn-outline-secondary">Login</a>
          </div>
          <?php
             }

@@ -19,11 +19,8 @@ if(isset($_SESSION['user_id'])){
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>orders</title>
-   
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
-   <!-- custom css file link  -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
    <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -47,16 +44,17 @@ if(isset($_SESSION['user_id'])){
             while($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)){
    ?>
    <div class="box">
-      <p>placed on : <span><?= $fetch_orders['placed_on']; ?></span></p>
-      <p>name : <span><?= $fetch_orders['name']; ?></span></p>
-      <p>email : <span><?= $fetch_orders['email']; ?></span></p>
-      <p>number : <span><?= $fetch_orders['number']; ?></span></p>
-      <p>address : <span><?= $fetch_orders['address']; ?></span></p>
-      <p>payment method : <span><?= $fetch_orders['method']; ?></span></p>
-      <p>your orders : <span><?= $fetch_orders['total_products']; ?></span></p>
-      <p>total price : <span>₱<?= $fetch_orders['total_price']; ?>/-</span></p>
-      <p> payment status : <span style="color:<?php if($fetch_orders['payment_status'] == 'pending'){ echo 'red'; }else{ echo 'green'; }; ?>"><?= $fetch_orders['payment_status']; ?></span> </p>
+      <h6 class="text-dark text-capitalize">placed on : <span><?= $fetch_orders['placed_on']; ?></span></h6>
+      <h6 class="text-dark text-capitalize">name : <span><?= $fetch_orders['name']; ?></span></h6>
+      <h6 class="text-dark text-capitalize">email : <span><?= $fetch_orders['email']; ?></span></h6>
+      <h6 class="text-dark text-capitalize">number : <span><?= $fetch_orders['number']; ?></span></h6>
+      <h6 class="text-dark text-capitalize">address : <span><?= $fetch_orders['address']; ?></span></h6>
+      <h6 class="text-dark text-capitalize">payment method : <span><?= $fetch_orders['method']; ?></span></h6>
+      <h6 class="text-dark text-capitalize">your orders : <span><?= $fetch_orders['total_products']; ?></span></h6>
+      <h6 class="text-dark text-capitalize">total price : <span>₱<?= $fetch_orders['total_price']; ?></span></h6>
+      <h6 class="text-dark text-capitalize"> payment status : <span style="color:<?php if($fetch_orders['payment_status'] == 'pending'){ echo 'red'; }else{ echo 'green'; }; ?>"><?= $fetch_orders['payment_status']; ?></span> </h6>
    </div>
+   
    <?php
       }
       }else{

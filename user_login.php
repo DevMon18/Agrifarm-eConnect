@@ -51,6 +51,9 @@ $responseJSON = json_encode($response);
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">
@@ -61,21 +64,41 @@ $responseJSON = json_encode($response);
 
    <?php require_once 'components/user_header.php'; ?>
 
-   <section class="form-container">
-
-      <form action="" method="post">
-         <h3>login now</h3>
-         <input type="email" name="email" required placeholder="Email" maxlength="50" class="form-control"
-            oninput="this.value = this.value.replace(/\s/g, '')">
-         <input type="password" name="pass" required placeholder="Password" maxlength="20" class="form-control"
-            oninput="this.value = this.value.replace(/\s/g, '')">
-         <input type="submit" value="login now" class="btn" name="submit">
-         <p>Don't have an account? <a href="user_register.php" class=""> Register now</a></p>
-      </form>
-
-   </section>
+   <div class="container mt-5 mb-5">
+      <div class="row justify-content-center">
+         <div class="col-md-4">
+            <div class="card">
+               <div class="card-body">
+                  <div class="text-center mb-4">
+                     <h3>Sign In</h3>
+                  </div>
+                  <form action="" method="post">
+                     <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" name="email"
+                           oninput="this.value = this.value.replace(/\s/g, '')" required>
+                     </div>
+                     <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="pass"
+                           oninput="this.value = this.value.replace(/\s/g, '')" required>
+                     </div>
+                     <div class="d-grid gap-2">
+                        <button type="submit" name="submit" class="btn btn-primary">Login</button>
+                     </div>
+                     <div class="text-center mt-3">
+                        <h6>Don't have an account? <a class="text-decoration-none" href="user_register.php">Register now</a></h6>
+                     </div>
+               </div>
+            </div>
+            </form>
+         </div>
+      </div>
+   </div>
+   </div>
    <?php require_once 'components/footer.php'; ?>
-
+   <?php require_once 'components/scripts.php'; ?>
+   
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    <script src="js/script.js"></script>
    <script>
