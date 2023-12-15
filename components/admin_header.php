@@ -28,9 +28,9 @@
 
       <div class="icons">
          <div id="menu-btn" class="fas fa-bars"></div>
-         <div id="user-btn" class="fas fa-user"></div>
+         <div id="user-btn" class="fas fa-"> <a href="../components/admin_logout.php" class="delete-btn" onclick="return confirm('logout from the website?');">logout</a> </div>
       </div>
-
+      
       <div class="profile">
          <?php
             $select_profile = $conn->prepare("SELECT * FROM `admins` WHERE id = ?");
