@@ -116,14 +116,14 @@ if(isset($_POST['submit'])){
                      </div>
                         <div class="col">
                            <div class="mb-3">
-                              <label for="exampleInputPassword1" class="form-label">number No</label>
-                              <input type="password" name="number" placeholder="09*********" class="form-control" required>
+                              <label for="exampleInputPassword1" class="form-label">Contact No</label>
+                              <input type="number" name="number" placeholder="09*********" class="form-control" required>
                            </div>
                         </div>
                      </div>
                      <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Password</label>
-                        <input type="email" name="pass" placeholder="Password" maxlength="20"  class="form-control" oninput="this.value = this.value.replace(/\s/g, '')" required>
+                        <input type="password" name="pass" placeholder="Password" maxlength="20"  class="form-control" oninput="this.value = this.value.replace(/\s/g, '')" required>
                      </div>
                      <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Retype-password</label>
