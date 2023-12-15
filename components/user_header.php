@@ -38,7 +38,7 @@
          <a href="search_page.php" class="text-decoration-none"><i class="bi bi-search"></i></a>
          <a href="wishlist.php" class="text-decoration-none"><i class="bi bi-heart-fill"></i><span> <?= $total_wishlist_counts; ?></span></a>
          <a href="cart.php" class="text-decoration-none"><i class="bi bi-cart-check-fill"></i><span> <?= $total_cart_counts; ?></span></a>
-         <div id="user-btn" class="fas bi bi-person-fill"></div>
+         <a id="user-btn" class="bi bi-person-fill"></a>
       </div>
 
       <div class="card rounded-lg w-25">

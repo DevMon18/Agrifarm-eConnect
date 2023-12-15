@@ -54,7 +54,7 @@ if(isset($_SESSION['user_id'])){
       <h6 class="text-dark text-capitalize">address : <span><?= $fetch_orders['address']; ?></span></h6>
       <h6 class="text-dark text-capitalize">payment method : <span><?= $fetch_orders['method']; ?></span></h6>
       <h6 class="text-dark text-capitalize">your orders : <span><?= $fetch_orders['total_products']; ?></span></h6>
-      <h6 class="text-dark text-capitalize">total price : <span>₱<?= $fetch_orders['total_price']; ?></span></h6>
+      <h6 class="text-dark text-capitalize">total price : <span>₱<?= $fetch_orders['total_price']; ?>/-</span></h6>
       <h6 class="text-dark text-capitalize"> payment status : <span style="color:<?php if($fetch_orders['payment_status'] == 'pending'){ echo 'red'; }else{ echo 'green'; }; ?>"><?= $fetch_orders['payment_status']; ?></span> </h6>
    </div>
    

@@ -28,7 +28,7 @@
 
       <div class="icons">
          <div id="menu-btn" class="fas fa-bars"></div>
-         <div id="user-btn" class="fas fa-"> <a href="../components/admin_logout.php" class="delete-btn" onclick="return confirm('logout from the website?');">logout</a> </div>
+         <div id="user-btn" class="bi bi-person-fill"> <a href="../components/admin_logout.php" class="delete-btn" onclick="return confirm('logout from the website?');">logout</a> </div>
       </div>
       
       <div class="profile">

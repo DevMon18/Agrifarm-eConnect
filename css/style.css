@@ -186,7 +186,8 @@ section{
 
 
 .header .flex .icons > *{
-   margin-left: 1rem;
+   font-size: 1rem;
+   margin-right: 10px;
    cursor: pointer;
    color:#e65f5c;
 }
