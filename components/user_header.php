@@ -50,7 +50,7 @@
          ?>
          <h6 class="text-dark text-center mb-3"><?= $fetch_profile["name"]; ?></h6>
          <div class="d-grid gap-2">
-            <a href="update_user.php" class="btn btn-primary">Update</a>
+            <a href="update_user.php" class="btn btn-success">Update Profile</a>
             <a href="components/user_logout.php" class="btn btn-danger" onclick="return confirm('logout from the website?');">Logout</a> 
          </div>
          <?php
@@ -58,7 +58,7 @@
          ?>
          <h6 class="text-dark text-center mb-3">Please login or register first!</h6>
          <div class="d-grid gap-2">
-            <a href="user_register.php" class="btn btn-primary">Sign in</a>
+            <a href="user_register.php" class="btn btn-primary">Sign Up</a>
             <a href="user_login.php" class="btn btn-outline-secondary">Login</a>
          </div>
          <?php

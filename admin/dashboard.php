@@ -56,7 +56,7 @@ if(!isset($admin_id)){
                }
             }
          ?>
-         <h3><span>$</span><?= $total_pendings; ?><span>/-</span></h3>
+         <h3><span>₱</span><?= $total_pendings; ?><span>/-</span></h3>
          <p>total pendings</p>
          <div class="d-grid gap-2">
          <a href="placed_orders.php" class="btn btn-primary btn-lg">see orders</a>
@@ -74,7 +74,7 @@ if(!isset($admin_id)){
                }
             }
          ?>
-         <h3><span>$</span><?= $total_completes; ?><span>/-</span></h3>
+         <h3><span>₱</span><?= $total_completes; ?><span>/-</span></h3>
          <p>completed orders</p>
          <div class="d-grid gap-2">
          <a href="placed_orders.php" class="btn btn-primary btn-lg">see orders</a>

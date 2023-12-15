@@ -32,48 +32,44 @@ require_once 'components/wishlist_cart.php';
 <body>
    <?php require_once 'components/user_header.php'; ?>
    <div class="home-">
-      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-         <div class="carousel-inner">
-            <div class="carousel-item active">
-               <img src="images/1.png" class="d-block w-100" alt="main">
-            </div>
-            <div class="carousel-item">
-               <img src="images/2.png" class="d-block w-100" alt="secondary">
-            </div>
-            <div class="carousel-item">
-               <img src="images/3.png" class="d-block w-100" alt="tertairy">
-            </div>
-         </div>
-         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-         </button>
-         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-         </button>
-      </div>
+   <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                  <div class="carousel-item active">
+                     <img src="images/caro1.png" class="d-block w-70 mx-auto" alt="main">
+                  </div>
+                  <div class="carousel-item">
+                     <img src="images/caro2.png" class="d-block w-70 mx-auto" alt="secondary">
+                  </div>
+               </div>
+               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                  data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+               </button>
+               <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                  data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+               </button>
+          </div>
       <section class="category">
          <h1 class="heading">shop by category</h1>
-         <div class="swiper category-slider">
-            <div class="swiper-wrapper">
-               <a href="category.php?category=laptop" class="swiper-slide slide">
-                  <img src="images/utan.jpg" alt="">
-                  <h3 class="text-dark text-capitalize text-decoration-none">Veggies</h3>
-               </a>
-               <a href="category.php?category=tv" class="swiper-slide slide">
-                  <img src="images/lamas.jpg" alt="">
-                  <h3 class="text-dark text-capitalize text-decoration-none">Root crops</h3>
-               </a>
-               <a href="category.php?category=camera" class="swiper-slide slide">
-                  <img src="images/live.jpg" alt="">
-                  <h3 class="text-dark text-capitalize text-decoration-none">Live stock</h3>
-               </a>
-            </div>
-            <div class="swiper-pagination"></div>
-         </div>
+         <div class="swiper category-slider swiper-no-swiping">
+   <div class="swiper-wrapper">
+      <a href="category.php?category=laptop" class="swiper-slide slide">
+         <img src="images/utan.jpg" alt="">
+         <h3 class="text-dark text-capitalize text-decoration-none">Veggies</h3>
+      </a>
+      <a href="category.php?category=tv" class="swiper-slide slide">
+         <img src="images/lamas.jpg" alt="">
+         <h3 class="text-dark text-capitalize text-decoration-none">Root crops</h3>
+      </a>
+      <a href="category.php?category=camera" class="swiper-slide slide">
+         <img src="images/live.jpg" alt="">
+         <h3 class="text-dark text-capitalize text-decoration-none">Live stock</h3>
+      </a>
+   </div>
+</div>
       </section>
       <section class="home-products">
          <h1 class="heading">latest products</h1>

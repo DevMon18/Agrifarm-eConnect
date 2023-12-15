@@ -18,7 +18,7 @@
       <a href="../admin/dashboard.php" class="logo">Admin<span>Panel</span></a>
 
       <nav class="navbar">
-         <a href="../admin/dashboard.php">Reservex</a>
+         <a href="../admin/dashboard.php">Home</a>
          <a href="../admin/products.php">Products</a>
          <a href="../admin/placed_orders.php">Orders</a>
          <a href="../admin/admin_accounts.php">Admins</a>
@@ -28,9 +28,9 @@
 
       <div class="icons">
          <div id="menu-btn" class="fas fa-bars"></div>
-         <div id="user-btn" class="bi bi-person-fill"></div>
+         <div id="user-btn" class="bi bi-person-fill"> <a href="../components/admin_logout.php" class="delete-btn" onclick="return confirm('logout from the website?');">logout</a> </div>
       </div>
-
+      
       <div class="profile">
          <?php
             $select_profile = $conn->prepare("SELECT * FROM `admins` WHERE id = ?");
