@@ -89,7 +89,7 @@ if(isset($_POST['submit'])){
             <div class="card">
                <div class="card-body">
                   <div class="text-center mb-4">
-                     <h3>Sign In</h3>
+                     <h3>Register</h3>
                   </div>
                   <form action="" method="post">
 
