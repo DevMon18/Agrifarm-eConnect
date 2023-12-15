@@ -43,7 +43,7 @@ if(isset($_POST['submit'])){
                'text' => 'Passwords do not match!'
             ];
          } else {
-            $insert_user = $conn->prepare("INSERT INTO `users`(name, email, address, number, password) VALUES(?,?,?,?,?)");
+            $insert_user = $conn->prepare("INSERT INTO `users`(name, email, address, contact, password) VALUES(?,?,?,?,?)");
             $insert_user->execute([$name, $email, $address, $number, $pass]);
    
             $response = [
