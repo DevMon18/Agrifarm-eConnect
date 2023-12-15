@@ -44,7 +44,7 @@ if (isset($_POST['order'])) {
 
    if ($check_cart->rowCount() > 0) {
 
-      $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, email, address,  number, total_products, total_price) VALUES(?,?,?,?,?,?,?)");
+      $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, email, address,  contact, total_products, total_price) VALUES(?,?,?,?,?,?,?)");
       $insert_order->execute([$user_id, $name, $email, $address, $number, $total_products, $total_price]);
 
       $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
@@ -75,10 +75,13 @@ $responseJSON = json_encode($response);
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>checkout</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-   <link rel="stylesheet" href="css/style.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css"> 
 
 </head>
 
@@ -132,7 +135,7 @@ $responseJSON = json_encode($response);
                         </div>
                      </div>
                      <div class="d-grid gap-2">
-                        <button class="btn btn-secondary btn-lg">Place your Orders</button>
+                        <button class="btn btn-danger btn-lg">Place your Orders</button>
                      </div>
 
                      <div class="row">
@@ -140,7 +143,7 @@ $responseJSON = json_encode($response);
                            <div class="mb-3">
                               <label for="exampleInputEmail1" class="form-label">Name</label>
                               <input type="text" class="form-control" name="name"
-                                 value="<?= isset($name) ? htmlspecialchars($name) : ''; ?>" class="form-control">
+                                 value="<?= isset($name) ? htmlspecialchars($name) : ''; ?>" class="form-control" disabled>
                            </div>
                         </div>
                         <div class="col">
@@ -148,7 +151,7 @@ $responseJSON = json_encode($response);
                               <label for="exampleInputPassword1" class="form-label">Email</label>
                               <input type="email" class="form-control" name="email"
                                  value="<?= isset($email) ? htmlspecialchars($email) : ''; ?>" class="form-control"
-                                 oninput="this.value = this.value.replace(/\s/g, '')" required>
+                                 oninput="this.value = this.value.replace(/\s/g, '')" required disabled>
                            </div>
                         </div>
                      </div>
@@ -158,7 +161,7 @@ $responseJSON = json_encode($response);
                               <label for="exampleInputEmail1" class="form-label">Address</label>
                               <input type="text" class="form-control" name="address"
                                  value="<?= isset($address) ? htmlspecialchars($address) : ''; ?>" class="form-control"
-                                 required>
+                                 required disabled>
                            </div>
                         </div>
                         <div class="col">
@@ -166,7 +169,7 @@ $responseJSON = json_encode($response);
                               <label for="exampleInputPassword1" class="form-label">Contact No</label>
                               <input type="number" name="number"
                                  value="<?= isset($contact) ? htmlspecialchars($contact) : ''; ?>" class="form-control"
-                                 required>
+                                 required disabled>
                            </div>
                         </div>
                         <div class="mb-3">
@@ -178,10 +181,8 @@ $responseJSON = json_encode($response);
                         <label class="input-group-text" for="inputGroupSelect01">Payment</label>
                         <select class="form-select" id="inputGroupSelect01" required>
                            <option selected>Choose...</option>
-                           <option value="cash on delivery">cash on delivery</option>
-                           <option value="credit card">credit card</option>
-                           <option value="paytm">paytm</option>
-                           <option value="paypal">paypal</option>
+                           <option value="cash on delivery">Cash on Delivery</option>
+                           <option value="Gcash_payment">Gcash Payment</option>
                         </select>
                      </div>
                      <div class="d-grid gap-2">

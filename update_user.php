@@ -17,9 +17,13 @@ if (isset($_POST['submit'])) {
    $name = filter_var($name, FILTER_SANITIZE_STRING);
    $email = $_POST['email'];
    $email = filter_var($email, FILTER_SANITIZE_STRING);
+   $address = $_POST['address'];
+   $address = filter_var($address, FILTER_SANITIZE_STRING);
+   $number = $_POST['number'];
+   $number = filter_var($number, FILTER_SANITIZE_STRING);
 
-   $update_profile = $conn->prepare("UPDATE `users` SET name = ?, email = ? WHERE id = ?");
-   $update_profile->execute([$name, $email, $user_id]);
+   $update_profile = $conn->prepare("UPDATE `users` SET name = ?, email = ?, address = ?, contact = ? WHERE id = ?");
+   $update_profile->execute([$name, $email, $address, $number, $user_id]);
 
    $empty_pass = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
    $prev_pass = $_POST['prev_pass'];
@@ -85,6 +89,14 @@ if (isset($_POST['submit'])) {
             <div class="mb-3">
                <input type="email" name="email" required placeholder="Enter your email" maxlength="50" class="form-control"
                   oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>">
+            </div>
+            <div class="mb-3">
+               <input type="text" name="address" required placeholder="Enter your Address" maxlength="50" class="form-control"
+                  value="<?= $fetch_profile["address"]; ?>">
+            </div>
+            <div class="mb-3">
+               <input type="number" name="number" required placeholder="Enter your Phone Number" maxlength="13" class="form-control"
+                  value="<?= $fetch_profile["contact"]; ?>">
             </div>
             <div class="mb-3">
                <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="form-control"
