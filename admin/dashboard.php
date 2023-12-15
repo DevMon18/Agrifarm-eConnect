@@ -21,8 +21,9 @@ if(!isset($admin_id)){
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>dashboard</title>
 
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
    <link rel="stylesheet" href="../css/admin_style.css">
 
 </head>
@@ -39,7 +40,9 @@ if(!isset($admin_id)){
       <div class="box">
          <h3>welcome!</h3>
          <p><?= $fetch_profile['name']; ?></p>
-         <a href="update_profile.php" class="btn">update profile</a>
+         <div class="d-grid gap-2">
+         <a href="update_profile.php" class="btn btn-primary btn-lg">update profile</a>
+         </div>
       </div>
 
       <div class="box">
@@ -55,7 +58,9 @@ if(!isset($admin_id)){
          ?>
          <h3><span>$</span><?= $total_pendings; ?><span>/-</span></h3>
          <p>total pendings</p>
-         <a href="placed_orders.php" class="btn">see orders</a>
+         <div class="d-grid gap-2">
+         <a href="placed_orders.php" class="btn btn-primary btn-lg">see orders</a>
+         </div>
       </div>
 
       <div class="box">
@@ -71,7 +76,9 @@ if(!isset($admin_id)){
          ?>
          <h3><span>$</span><?= $total_completes; ?><span>/-</span></h3>
          <p>completed orders</p>
-         <a href="placed_orders.php" class="btn">see orders</a>
+         <div class="d-grid gap-2">
+         <a href="placed_orders.php" class="btn btn-primary btn-lg">see orders</a>
+         </div>
       </div>
 
       <div class="box">
@@ -82,7 +89,9 @@ if(!isset($admin_id)){
          ?>
          <h3><?= $number_of_orders; ?></h3>
          <p>orders placed</p>
-         <a href="placed_orders.php" class="btn">see orders</a>
+         <div class="d-grid gap-2">
+         <a href="placed_orders.php" class="btn btn-primary btn-lg">see orders</a>
+         </div>
       </div>
 
       <div class="box">
@@ -93,7 +102,9 @@ if(!isset($admin_id)){
          ?>
          <h3><?= $number_of_products; ?></h3>
          <p>products added</p>
-         <a href="products.php" class="btn">see products</a>
+         <div class="d-grid gap-2">
+         <a href="products.php" class="btn btn-primary btn-lg">see products</a>
+         </div>
       </div>
 
       <div class="box">
@@ -104,7 +115,9 @@ if(!isset($admin_id)){
          ?>
          <h3><?= $number_of_users; ?></h3>
          <p>normal users</p>
-         <a href="users_accounts.php" class="btn">see users</a>
+         <div class="d-grid gap-2">
+         <a href="users_accounts.php" class="btn btn-primary btn-lg">see users</a>
+         </div>
       </div>
 
       <div class="box">
@@ -115,7 +128,9 @@ if(!isset($admin_id)){
          ?>
          <h3><?= $number_of_admins; ?></h3>
          <p>admin users</p>
-         <a href="admin_accounts.php" class="btn">see admins</a>
+         <div class="d-grid gap-2">
+         <a href="admin_accounts.php" class="btn btn-primary btn-lg">see admins</a>
+         </div>
       </div>
 
       <div class="box">
@@ -126,7 +141,9 @@ if(!isset($admin_id)){
          ?>
          <h3><?= $number_of_messages; ?></h3>
          <p>new messages</p>
-         <a href="messagess.php" class="btn">see messages</a>
+         <div class="d-grid gap-2">
+         <a href="messagess.php" class="btn btn-primary btn-lg">see messages</a>
+         </div>
       </div>
 
    </div>

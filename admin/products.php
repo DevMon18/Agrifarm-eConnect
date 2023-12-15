@@ -91,7 +91,8 @@ if(isset($_GET['delete'])){
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>products</title>
-
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
    <link rel="stylesheet" href="../css/admin_style.css">
@@ -132,8 +133,9 @@ if(isset($_GET['delete'])){
             <textarea name="details" placeholder="enter product details" class="box" required maxlength="500" cols="30" rows="10"></textarea>
          </div>
       </div>
-      
-      <input type="submit" value="add product" class="btn" name="add_product">
+      <div class="d-grid gap-2 mt-4">
+         <button type="submit" class="btn btn-primary btn-lg" name="add_product">Add Product</button>
+      </div>
    </form>
 
 </section>
@@ -156,8 +158,8 @@ if(isset($_GET['delete'])){
       <div class="price">₱<span><?= $fetch_products['price']; ?></span>/-</div>
       <div class="details"><span><?= $fetch_products['details']; ?></span></div>
       <div class="flex-btn">
-         <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn">update</a>
-         <a href="products.php?delete=<?= $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('delete this product?');">delete</a>
+         <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="btn btn-primary btn-lg">update</a>
+         <a href="products.php?delete=<?= $fetch_products['id']; ?>" class="btn btn-danger btn-lg" onclick="return confirm('delete this product?');">delete</a>
       </div>
    </div>
    <?php

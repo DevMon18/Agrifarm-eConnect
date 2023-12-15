@@ -93,7 +93,8 @@ if(isset($_POST['update'])){
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>update product</title>
-
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
    <link rel="stylesheet" href="../css/admin_style.css">
@@ -141,8 +142,9 @@ if(isset($_POST['update'])){
       <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
       <span>update image 03</span>
       <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
-      <div class="flex-btn">
-         <input type="submit" name="update" class="btn" value="update">
+      <div class="d-grid gap-2">
+         <button type="submit" name="update" class="btn btn-primary btn-lg">Update</button>
+      </div>
          <a href="products.php" class="option-btn">go back</a>
       </div>
    </form>

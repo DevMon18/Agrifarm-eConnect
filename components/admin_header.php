@@ -28,7 +28,7 @@
 
       <div class="icons">
          <div id="menu-btn" class="fas fa-bars"></div>
-         <div id="user-btn" class="fas fa-user"></div>
+         <div id="user-btn" class="bi bi-person-fill"></div>
       </div>
 
       <div class="profile">
