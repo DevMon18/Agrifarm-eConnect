@@ -47,15 +47,15 @@ if(isset($_SESSION['user_id'])){
             while($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)){
    ?>
    <div class="box">
-      <h6 class="text-dark text-capitalize">placed on : <span><?= $fetch_orders['placed_on']; ?></span></h6>
-      <h6 class="text-dark text-capitalize">name : <span><?= $fetch_orders['name']; ?></span></h6>
-      <h6 class="text-dark text-capitalize">email : <span><?= $fetch_orders['email']; ?></span></h6>
-      <h6 class="text-dark text-capitalize">number : <span><?= $fetch_orders['number']; ?></span></h6>
-      <h6 class="text-dark text-capitalize">address : <span><?= $fetch_orders['address']; ?></span></h6>
-      <h6 class="text-dark text-capitalize">payment method : <span><?= $fetch_orders['method']; ?></span></h6>
-      <h6 class="text-dark text-capitalize">your orders : <span><?= $fetch_orders['total_products']; ?></span></h6>
-      <h6 class="text-dark text-capitalize">total price : <span>₱<?= $fetch_orders['total_price']; ?>/-</span></h6>
-      <h6 class="text-dark text-capitalize"> payment status : <span style="color:<?php if($fetch_orders['payment_status'] == 'pending'){ echo 'red'; }else{ echo 'green'; }; ?>"><?= $fetch_orders['payment_status']; ?></span> </h6>
+      <h6 class="text-dark">Placed on : <span><?= $fetch_orders['placed_on']; ?></span></h6>
+      <h6 class="text-dark">Name : <span><?= $fetch_orders['name']; ?></span></h6>
+      <h6 class="text-dark">Email : <span><?= $fetch_orders['email']; ?></span></h6>
+      <h6 class="text-dark">Number : <span><?= $fetch_orders['number']; ?></span></h6>
+      <h6 class="text-dark">Address : <span><?= $fetch_orders['address']; ?></span></h6>
+      <h6 class="text-dark">Payment method : <span><?= $fetch_orders['method']; ?></span></h6>
+      <h6 class="text-dark">Your orders : <span><?= $fetch_orders['total_products']; ?></span></h6>
+      <h6 class="text-dark">Total price : <span>₱<?= $fetch_orders['total_price']; ?>/-</span></h6>
+      <h6 class="text-dark">Payment status : <span style="color:<?php if($fetch_orders['payment_status'] == 'pending'){ echo 'red'; }else{ echo 'green'; }; ?>"><?= $fetch_orders['payment_status']; ?></span> </h6>
    </div>
    
    <?php

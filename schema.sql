@@ -59,7 +59,7 @@ CREATE TABLE users (
   name varchar(250) NOT NULL,
   email varchar(250) NOT NULL,
   address varchar(250) NOT NULL,
-  number int(11) NOT NULL,
+  number VARCHAR(30) NOT NULL,
   password varchar(250) NOT NULL,
   otp INT NULL,
   is_verified tinyint(1) NOT NULL DEFAULT 0

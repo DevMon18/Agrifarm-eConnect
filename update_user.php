@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
    $number = $_POST['number'];
    $number = filter_var($number, FILTER_SANITIZE_STRING);
 
-   $update_profile = $conn->prepare("UPDATE `users` SET name = ?, email = ?, address = ?, contact = ? WHERE id = ?");
+   $update_profile = $conn->prepare("UPDATE `users` SET name = ?, email = ?, address = ?, number = ? WHERE id = ?");
    $update_profile->execute([$name, $email, $address, $number, $user_id]);
 
    $empty_pass = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
@@ -35,21 +35,43 @@ if (isset($_POST['submit'])) {
    $cpass = filter_var($cpass, FILTER_SANITIZE_STRING);
 
    if ($old_pass == $empty_pass) {
-      $message[] = 'please enter old password!';
+      $response = [
+         'icon' => 'error',
+         'title' => 'error',
+         'text' => 'Please Enter Old Password!',
+      ];
    } elseif ($old_pass != $prev_pass) {
-      $message[] = 'old password not matched!';
+      $response = [
+         'icon' => 'error',
+         'title' => 'error',
+         'text' => 'Old Password Not Matched!',
+      ];
    } elseif ($new_pass != $cpass) {
-      $message[] = 'confirm password not matched!';
+      $response = [
+         'icon' => 'error',
+         'title' => 'error',
+         'text' => 'Username Already Exist!',
+      ];
+      $message[] = 'Username Already Exist!';
    } else {
       if ($new_pass != $empty_pass) {
          $update_admin_pass = $conn->prepare("UPDATE `users` SET password = ? WHERE id = ?");
          $update_admin_pass->execute([$cpass, $user_id]);
-         $message[] = 'password updated successfully!';
+         $response = [
+            'icon' => 'success',
+            'title' => 'success',
+            'text' => 'Password Update Successfully!',
+         ];
       } else {
-         $message[] = 'please enter a new password!';
+         $response = [
+            'icon' => 'error',
+            'title' => 'error',
+            'text' => 'Please Enter A New Password!',
+         ];
       }
    }
 
+   $responseJSON = json_encode($response);
 }
 
 ?>
@@ -74,51 +96,109 @@ if (isset($_POST['submit'])) {
 <body>
 
    <?php require_once 'components/user_header.php'; ?>
-
-   <section class="form-container">
-
-      <form action="" method="post">
-         <h3>update now</h3>
-         <div class="mb-3">
-               <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
+      <div class="container mt-5 mb-5">
+         <div class="row justify-content-center">
+            <div class="col-md-6">
+               <div class="card">
+                  <div class="card-body">
+                     <div class="text-center mb-4">
+                        <h3>Update Profile</h3>
+                     </div>
+                     <form action="" method="post">
+                     <div class="mb-3">
+                        <input type="hidden" class="form-control" name="prev_pass" value="<?= $fetch_profile["password"]; ?>" placeholder="Name" class="form-control">
+                     </div>
+                     <div class="row">
+                        <div class="col">
+                           <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Name</label>
+                              <input type="text" class="form-control" name="name" value="<?= $fetch_profile["name"]; ?>" placeholder="Name" class="form-control">
+                           </div>
+                        </div>
+                           <div class="col">
+                              <div class="mb-3">
+                                 <label for="exampleInputPassword1" class="form-label">Email</label>
+                                 <input type="email" class="form-control" name="email" value="<?= $fetch_profile["email"]; ?>" placeholder="Email"  class="form-control" oninput="this.value = this.value.replace(/\s/g, '')" required>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                        <div class="col">
+                           <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Address</label>
+                              <input type="text" class="form-control" name="address" value="<?= $fetch_profile["address"]; ?>" placeholder="Address" class="form-control" required>
+                           </div>
+                        </div>
+                           <div class="col">
+                              <div class="mb-3">
+                                 <label for="exampleInputPassword1" class="form-label">Contact No</label>
+                                 <input type="number" name="number" value="<?= $fetch_profile["number"]; ?>" placeholder="09*********" class="form-control" required>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="mb-3">
+                           <label for="exampleInputEmail1" class="form-label">Old Password</label>
+                           <input type="password" name="old_pass" placeholder="Enter Old Password" maxlength="20"  class="form-control" oninput="this.value = this.value.replace(/\s/g, '')" required>
+                        </div>
+                        <div class="mb-3">
+                           <label for="exampleInputEmail1" class="form-label">New Password</label>
+                           <input type="password" name="new_pass" placeholder="Enter New Password" maxlength="20"  class="form-control" oninput="this.value = this.value.replace(/\s/g, '')" required>
+                        </div>
+                        <div class="mb-3">
+                           <label for="exampleInputPassword1" class="form-label">Retype-password</label>
+                           <input type="password" name="cpass" placeholder="Retype-password" maxlength="20"  class="form-control" oninput="this.value = this.value.replace(/\s/g, '')" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                           <button type="submit" name="submit" class="btn btn-primary">Update</button>
+                        </div>
+                     </div>
+                  </div>
+               </form>
             </div>
-            <div class="mb-3">
-               <input type="text" name="name" required placeholder="Enter your username" maxlength="20" class="form-control"
-                  value="<?= $fetch_profile["name"]; ?>">
-            </div>
-            <div class="mb-3">
-               <input type="email" name="email" required placeholder="Enter your email" maxlength="50" class="form-control"
-                  oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>">
-            </div>
-            <div class="mb-3">
-               <input type="text" name="address" required placeholder="Enter your Address" maxlength="50" class="form-control"
-                  value="<?= $fetch_profile["address"]; ?>">
-            </div>
-            <div class="mb-3">
-               <input type="number" name="number" required placeholder="Enter your Phone Number" maxlength="13" class="form-control"
-                  value="<?= $fetch_profile["contact"]; ?>">
-            </div>
-            <div class="mb-3">
-               <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="form-control"
-                  oninput="this.value = this.value.replace(/\s/g, '')">
-            </div>
-            <div class="mb-3">
-               <input type="password" name="new_pass" placeholder="Enter your new password" maxlength="20" class="form-control"
-                  oninput="this.value = this.value.replace(/\s/g, '')">
-            </div>
-            <div class="mb-3">
-               <input type="password" name="cpass" placeholder="Confirm your new password" maxlength="20" class="form-control"
-                  oninput="this.value = this.value.replace(/\s/g, '')">
-            </div>
-            <div class="mb-3">
-               <input type="submit" value="Update now" class="btn btn-primary" name="submit">
-            </div>
-      </form>
-
+         </div>
+      </div>
+   </div>
    </section>
    <?php require_once 'components/footer.php'; ?>
 
-   <script src="js/script.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+   <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"></script>
+   <script src="js/admin_script.js"></script>
+   <script src="js/jquery.min.js"></script>
+   <script src="js/carousel.js"></script>
+   <script src="js/index.js"></script>
+   <script src="js/input.js"></script>
+   <script src="js/image.js"></script>
+   <script src="js/app.min.js"></script>
+   <script src="js/admin_script.js"></script>
+   <script>
+      const response = <?php echo $responseJSON; ?>;
+      const showAlert = (response) => {
+            switch (response.icon) {
+               case 'success':
+                  Swal.fire({
+                        icon: response.icon,
+                        title: response.title,
+                        text: response.text
+                  });
+                  break;
+               case 'error':
+                  Swal.fire({
+                        icon: response.icon,
+                        title: response.title,
+                        text: response.text
+                  });
+                  break;
+               default:
+                  alert(response.text);
+                  break;
+            }
+         };
+      showAlert(response);
+   </script>
 
 </body>
 

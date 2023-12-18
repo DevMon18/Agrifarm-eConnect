@@ -21,13 +21,17 @@ if ($select_user_info->rowCount() > 0) {
    $user_data = $select_user_info->fetch(PDO::FETCH_ASSOC);
    $name = $user_data['name'];
    $email = $user_data['email'];
-   $contact = $user_data['contact'];
+   $number = $user_data['number'];
    $address = $user_data['address'];
+   $total_products = $user_data['total_products'];
+   $total_price = $user_data['total_price'];
 } else {
    $name = '';
    $email = '';
-   $contact = '';
+   $number = '';
    $address = '';
+   $total_products = '';
+   $total_price = '';
 }
 
 if (isset($_POST['order'])) {
@@ -44,7 +48,7 @@ if (isset($_POST['order'])) {
 
    if ($check_cart->rowCount() > 0) {
 
-      $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, email, address,  contact, total_products, total_price) VALUES(?,?,?,?,?,?,?)");
+      $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, email, address,  number, total_products, total_price) VALUES(?,?,?,?,?,?,?)");
       $insert_order->execute([$user_id, $name, $email, $address, $number, $total_products, $total_price]);
 
       $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
@@ -60,9 +64,10 @@ if (isset($_POST['order'])) {
       'icon' => 'success',
       'title' => 'Empty Cart!'
    ];
+
+   $responseJSON = json_encode($response);
 }
 
-$responseJSON = json_encode($response);
 
 
 ?>
@@ -98,7 +103,7 @@ $responseJSON = json_encode($response);
                         <button type="button" class="btn btn-secondary btn-lg">Your Orders</button>
                         <div class="display-orders">
                            <input type="hidden" name="total_products" value="<?= $total_products; ?>">
-                           <input type="hidden" name="total_price" value="<?= $grand_total; ?>" value="">
+                           <input type="hidden" name="total_price" value="<?= $grand_total; ?>">
 
                            <div class="row mt-4">
                               <div class="col">
@@ -138,20 +143,17 @@ $responseJSON = json_encode($response);
                         <button class="btn btn-danger btn-lg">Place your Orders</button>
                      </div>
 
-                     <div class="row">
+                     <div class="row mt-4">
                         <div class="col">
                            <div class="mb-3">
                               <label for="exampleInputEmail1" class="form-label">Name</label>
-                              <input type="text" class="form-control" name="name"
-                                 value="<?= isset($name) ? htmlspecialchars($name) : ''; ?>" class="form-control" disabled>
+                              <input type="text" class="form-control" name="name" value="<?= isset($name) ? htmlspecialchars($name) : ''; ?>" readonly>
                            </div>
                         </div>
                         <div class="col">
                            <div class="mb-3">
                               <label for="exampleInputPassword1" class="form-label">Email</label>
-                              <input type="email" class="form-control" name="email"
-                                 value="<?= isset($email) ? htmlspecialchars($email) : ''; ?>" class="form-control"
-                                 oninput="this.value = this.value.replace(/\s/g, '')" required disabled>
+                              <input type="email" class="form-control" name="email" value="<?= isset($email) ? htmlspecialchars($email) : ''; ?>" #oninput="this.value = this.value.replace(/\s/g, '')" required readonly>
                            </div>
                         </div>
                      </div>
@@ -160,21 +162,21 @@ $responseJSON = json_encode($response);
                            <div class="mb-3">
                               <label for="exampleInputEmail1" class="form-label">Address</label>
                               <input type="text" class="form-control" name="address"
-                                 value="<?= isset($address) ? htmlspecialchars($address) : ''; ?>" class="form-control"
-                                 required disabled>
+                                 value="<?= isset($address) ? htmlspecialchars($address) : ''; ?>"
+                                 required readonly>
                            </div>
                         </div>
                         <div class="col">
                            <div class="mb-3">
-                              <label for="exampleInputPassword1" class="form-label">Contact No</label>
+                              <label for="exampleInputPassword1" class="form-label">number No</label>
                               <input type="number" name="number"
-                                 value="<?= isset($contact) ? htmlspecialchars($contact) : ''; ?>" class="form-control"
-                                 required disabled>
+                                 value="<?= isset($number) ? htmlspecialchars($number) : ''; ?>" class="form-control"
+                                 required readonly>
                            </div>
                         </div>
                         <div class="mb-3">
                            <label for="exampleInputPassword1" class="form-label">Reference No</label>
-                           <input type="number" name="contact" class="form-control" required>
+                           <input type="number" name="number" class="form-control" required>
                         </div>
                      </div>
                      <div class="input-group mb-3 mt-2">
@@ -187,7 +189,7 @@ $responseJSON = json_encode($response);
                      </div>
                      <div class="d-grid gap-2">
                         <button type="submit" name="order"
-                           class="btn btn-primary <?= ($grand_total > 1) ? '' : 'disabled'; ?>">Place Order</button>
+                           class="btn btn-primary <?= ($grand_total > 1) ? '' : 'readonly'; ?>">Place Order</button>
                      </div>
                   </div>
                </div>
