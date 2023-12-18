@@ -97,7 +97,6 @@ $responseJSON = json_encode($response);
    </div>
    </div>
    <?php require_once 'components/footer.php'; ?>
-   <?php require_once 'components/scripts.php'; ?>
    
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    <script src="js/script.js"></script>
