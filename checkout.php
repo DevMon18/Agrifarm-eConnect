@@ -64,10 +64,9 @@ if (isset($_POST['order'])) {
       'icon' => 'success',
       'title' => 'Empty Cart!'
    ];
-
-   $responseJSON = json_encode($response);
 }
 
+$responseJSON = json_encode($response);
 
 
 ?>

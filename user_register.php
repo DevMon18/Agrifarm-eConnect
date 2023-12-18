@@ -52,11 +52,10 @@ if(isset($_POST['submit'])){
                'text' => 'User added successfully!',
                'redirect' => 'user_login.php'
             ];
-
-            $responseJSON = json_encode($response);
          }
    }
    
+   $responseJSON = json_encode($response);
 
 }
 

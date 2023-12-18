@@ -69,9 +69,9 @@ if (isset($_POST['submit'])) {
             'text' => 'Please Enter A New Password!',
          ];
       }
-   }
 
-   $responseJSON = json_encode($response);
+      $responseJSON = json_encode($response);
+   }
 }
 
 ?>

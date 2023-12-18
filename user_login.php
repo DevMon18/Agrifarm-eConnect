@@ -32,12 +32,11 @@ if (isset($_POST['submit'])) {
          'title' => 'Oops...',
          'text' => 'Wrong Password!'
       ];
-
-      $responseJSON = json_encode($response);
    }
 }
 
 
+$responseJSON = json_encode($response);
 
 ?>
 
