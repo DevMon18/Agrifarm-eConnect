@@ -103,7 +103,7 @@ $responseJSON = json_encode($response);
             <div class="col-md-4">
                <div class="card">
                   <div class="card-body">
-                     <p>grand total : <span>$
+                     <p>grand total : <span>₱
                            <?= $grand_total; ?>
                         </span></p>
                      <div class="d-grid gap-2">

@@ -23,15 +23,11 @@ if ($select_user_info->rowCount() > 0) {
    $email = $user_data['email'];
    $number = $user_data['number'];
    $address = $user_data['address'];
-   $total_products = $user_data['total_products'];
-   $total_price = $user_data['total_price'];
 } else {
    $name = '';
    $email = '';
    $number = '';
    $address = '';
-   $total_products = '';
-   $total_price = '';
 }
 
 if (isset($_POST['order'])) {
@@ -101,9 +97,6 @@ $responseJSON = json_encode($response);
                      <div class="d-grid gap-2">
                         <button type="button" class="btn btn-secondary btn-lg">Your Orders</button>
                         <div class="display-orders">
-                           <input type="hidden" name="total_products" value="<?= $total_products; ?>">
-                           <input type="hidden" name="total_price" value="<?= $grand_total; ?>">
-
                            <div class="row mt-4">
                               <div class="col">
                                  <?php
@@ -113,7 +106,7 @@ $responseJSON = json_encode($response);
                                  $select_cart->execute([$user_id]);
                                  if ($select_cart->rowCount() > 0) {
                                     while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
-                                       $cart_items[] = $fetch_cart['name'] . ' (' . $fetch_cart['price'] . ' x ' . $fetch_cart['quantity'] . ') - ';
+                                       $cart_items[] = $fetch_cart['name'] . ' (' . $fetch_cart['price'] . ' x ' . $fetch_cart['quantity'] . ') ';
                                        $total_products = implode($cart_items);
                                        $grand_total += ($fetch_cart['price'] * $fetch_cart['quantity']);
                                        ?>
@@ -128,9 +121,9 @@ $responseJSON = json_encode($response);
                                     echo '<p class="empty">your cart is empty!</p>';
                                  }
                                  ?>
-                                 <h5 class="grand-total text-dark">Grand total : <span class="text-primary">₱
-                                       <?= $grand_total; ?>
-                                    </span></h5>
+                                 <input type="hidden" name="total_products" value="<?= $total_products; ?>">
+                                 <input type="hidden" name="total_price" value="<?= $grand_total; ?>">
+                                 <h5 class="grand-total text-dark">Grand total : <span class="text-primary">₱<?= $grand_total; ?></span></h5>
                               </div>
                               <div class="col">
                                  <img src="images/QR.jpg" class="img-fluid mb-4" style="height: 150px; width: 150px;">
