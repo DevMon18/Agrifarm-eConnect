@@ -77,19 +77,6 @@ require_once 'components/wishlist_cart.php';
    ?>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php require_once 'components/footer.php'; ?>
 
 <script src="js/script.js"></script>

@@ -48,6 +48,7 @@
             if($select_profile->rowCount() > 0){
             $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
          ?>
+         
          <h6 class="text-dark text-center mb-3"><?= $fetch_profile["name"]; ?></h6>
          <div class="d-grid gap-2">
             <a href="update_user.php" class="btn btn-primary">Update Profile</a>

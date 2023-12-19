@@ -116,7 +116,6 @@ require_once 'components/wishlist_cart.php';
 
       </section>
 
-      <?php require_once 'components/scripts.php'; ?>
       <?php require_once 'components/footer.php'; ?>
 
       <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
