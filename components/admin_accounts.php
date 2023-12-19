@@ -103,7 +103,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <!-- Login button -->
                         <div class="text-center mt-4 mb-2 h6">
-                            <button type="submit" name="submit" class="btn btn-block btn-primary">Update</button>
+                            <button type="submit" name="submit" class="btn btn-block btn-primary">Add</button>
                         </div>
                     </form>
                 </div>
@@ -126,11 +126,7 @@ if (isset($_POST['submit'])) {
                                 <!-- Update button -->
                                 <div class="text-center mt-2 mb-2">
                                     <a href="admin_accounts1.php?delete=<?= $fetch_accounts['id']; ?>" onclick="return confirm('delete this account?')" class="btn btn-block btn-danger">Delete</a>
-                                    <?php
-                                        if ($fetch_accounts['id'] == $admin_id) {
-                                            echo '<a href="update_profile.php" class="btn btn-block btn-primary">update</a>';
-                                        }
-                                    ?>
+                                    
                                 </div>
                             </div>
                         </div>
